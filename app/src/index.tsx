@@ -5,19 +5,41 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Layout } from "./components/Layout";
-import { Work } from "./pages/Work";
+import { Login } from "./pages/Login";
+import { AuthProvider } from "./Context/AuthContext";
+import { Dashboard } from "./pages/Dashboard";
+import { AddCommand } from "./pages/commande/AddCommand";
+import { DetailCommand } from "./pages/commande/DetailCommand";
+import { AddEmp } from "./pages/employes/AddEmp";
+import { DetailEmp } from "./pages/employes/DetailEmp";
+import { EmpList } from "./pages/employes/EmpList";
+import { TaskList } from "./pages/task/TaskList";
+import { TaskAttrib } from "./pages/task/TaskAttrib";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
 root.render(
   <React.StrictMode>
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Layout />}></Route>
-        <Route path="/work" element={<Work />} />
-      </Routes>
-    </BrowserRouter>
+    <AuthProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Layout />} />
+          <Route path="/Login" element={<Login />} />
+          <Route path="/Dashboard" element={<Dashboard />} />
+          {/* Commande */}
+          <Route path="/AddCommand" element={<AddCommand />} />
+          <Route path="/DetailCommand" element={<DetailCommand />} />
+          {/* Employes */}
+          <Route path="/AddEmp" element={<AddEmp />} />
+          <Route path="/DetailEmp" element={<DetailEmp />} />
+          <Route path="/EmpList" element={<EmpList />} />
+          {/* Task */}
+          <Route path="/TaskList" element={<TaskList />} />
+          <Route path="/TaskAttrib" element={<TaskAttrib />} />
+        </Routes>
+      </BrowserRouter>
+    </AuthProvider>
   </React.StrictMode>
 );
 
