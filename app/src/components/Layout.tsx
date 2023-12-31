@@ -37,6 +37,8 @@ export const Layout: React.FC = () => {
           <a href="/TaskAttrib">Task Attribute</a>
         </li>
       </ul>
+
+      <img src="/Backimage/Bg.png" alt="" />
       <Outlet />
     </div>
   );

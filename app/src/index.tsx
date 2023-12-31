@@ -22,7 +22,8 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <AuthProvider>
-      <BrowserRouter>
+      <div className="font-Poppins">
+         <BrowserRouter>
         <Routes>
           <Route path="/" element={<Layout />} />
           <Route path="/Login" element={<Login />} />
@@ -39,6 +40,8 @@ root.render(
           <Route path="/TaskAttrib" element={<TaskAttrib />} />
         </Routes>
       </BrowserRouter>
+      </div>
+     
     </AuthProvider>
   </React.StrictMode>
 );

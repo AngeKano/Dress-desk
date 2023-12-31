@@ -1,6 +1,6 @@
 import React from "react";
 
-export const DetailCommand = () => {
+export const DetailCommand = (props: any) => {
   return (
     <div className="bg-slate-300">
       <div className="gap-5 flex max-md:flex-col max-md:items-stretch max-md:gap-0">
@@ -8,7 +8,7 @@ export const DetailCommand = () => {
           <div className="bg-white flex w-full grow flex-col mx-auto pl-4 pr-3 py-11">
             <div className="self-center flex items-stretch gap-1.5">
               <div className="text-black text-2xl self-center grow whitespace-nowrap my-auto">
-                DRESS
+                DRESS{props.title}
               </div>
             </div>
             <div className="bg-stone-300 self-stretch shrink-0 h-px mt-12 max-md:mt-10" />
@@ -195,4 +195,3 @@ export const DetailCommand = () => {
     </div>
   );
 };
-
