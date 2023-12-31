@@ -2,8 +2,8 @@ import React from "react";
 import { ButtonNav } from "./ButtonNav";
 import { useAuth } from "../../Context/AuthContext";
 
-export const Nav = () => {
-    const { userEmail, setAuthUser, userPassword, setPwd, setAccessToken } =
+export const Nav = (props: any) => {
+  const { userEmail, setAuthUser, userPassword, setPwd, setAccessToken } =
     useAuth();
   return (
     <div className="flex flex-col items-stretch w-[18%] max-md:w-full max-md:ml-0">
@@ -19,20 +19,44 @@ export const Nav = () => {
           <ButtonNav
             title="Dashboard"
             href="/Dashboard"
-            icon="/icons/dashboard.svg"
-            active
+            active={props.Lien == "Dashboard" ? true : false}
+            icon={
+              props.Lien == "Dashboard"
+                ? "/icons/dashboard.svg"
+                : "/icons/dashDark.svg  "
+            }
           />
           <ButtonNav
             title="Liste Tache"
             href="/TaskList"
-            icon="/icons/liste.svg"
+            icon={
+              props.Lien == "Liste Tache"
+                ? "/icons/listeWit.svg"
+                : "/icons/liste.svg"
+            }
+            active={props.Lien == "Liste Tache" ? true : false}
           />
-          <ButtonNav title="Employés" href="/EmpList" icon="/icons/Users.svg" />
-          <ButtonNav title="Services" href="/Services" icon="/icons/box.svg" />
+          <ButtonNav
+            title="Employés"
+            href="/EmpList"
+            icon={
+              props.Lien == "Employés"
+                ? "/icons/UsersWit.svg"
+                : "/icons/Users.svg"
+            }
+            active={props.Lien == "Employés" ? true : false}
+          />
+          <ButtonNav
+            title="Services"
+            href="/Services"
+            icon="/icons/box.svg"
+            active={props.Lien == "Services" ? true : false}
+          />
           <ButtonNav
             title="Notifications"
             href="/Notifications"
             icon="/icons/notification.svg"
+            active={props.Lien == "Notifications" ? true : false}
           />
         </div>
 

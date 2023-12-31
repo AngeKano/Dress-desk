@@ -16,6 +16,9 @@ export const HeaderTxt = (props: any) => {
         <span className="text-zinc-500 text-lg font-medium my-auto">
           {yourDate.toISOString().split("T")[0]}
         </span>
+        <div className="bg-zinc-100 rounded-full p-3">
+          <img src="/icons/dash/date.svg" alt="" />
+        </div>
       </div>
     </div>
   );

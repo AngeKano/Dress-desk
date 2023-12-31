@@ -2,16 +2,14 @@ import React from "react";
 import { Nav } from "../components/nav/Nav";
 import { HeaderNav } from "../components/nav/HeaderNav";
 import { HeaderTxt } from "../components/nav/HeaderTxt";
-import { Stats } from "../components/nav/items/Stats";
 import { HeaderStat } from "../components/nav/HeaderStat";
-import { Status } from "../components/status/Status";
 import { ItemsCommd } from "../components/nav/items/ItemsCommd";
 
 export const Dashboard = () => {
   return (
     <div className="bg-slate-300">
       <div className=" flex max-md:flex-col max-md:items-stretch max-md:gap-0">
-        <Nav />
+        <Nav Lien="Dashboard" />
         <div className="flex flex-col items-stretch w-[82%] max-md:w-full ">
           <div className="bg-white flex grow flex-col w-full pl-12 pr-20 py-11 border-l-stone-300 border-l border-solid max-md:max-w-full max-md:px-5">
             <HeaderNav />
@@ -39,9 +37,7 @@ export const Dashboard = () => {
 
             {/* Listes */}
 
-            <ItemsCommd/>
-
-          
+            <ItemsCommd />
           </div>
         </div>
       </div>

@@ -1,7 +1,7 @@
 import React from "react";
 
 export const ButtonNav = (props: any) => {
-  return props.active ? (
+  return props.active==true ? (
     <a
       href={props.href}
       className="justify-center items-center bg-black flex mt-3 py-3 rounded-[30px]"
