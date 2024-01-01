@@ -1,12 +1,13 @@
 import React, { useContext, useState } from "react";
-import { useAuth } from "../Context/AuthContext";
 import axios from "../api/axios";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../Context/AuthContext";
 
 export const Login: React.FC = () => {
   const electron = (window as any).electron;
-  const { userEmail, setAuthUser, userPassword, setPwd, setAccessToken } =
-    useAuth();
+
+  const { userEmail, setAuthUser, userPassword, setPwd, setAccessToken, } =
+    useContext(AuthContext);
   const REGISTER_URL = "/auth/login";
   const [error, setError] = useState(false);
 
@@ -75,7 +76,7 @@ export const Login: React.FC = () => {
               aria-label="Identifiant"
               role="textbox"
               className={
-                (error==true
+                (error == true
                   ? "border-red-500 border-2 border-solid"
                   : "border-2 border-solid") +
                 " self-stretch justify-center mt-3 px-7 py-3 rounded-[100px] items-start max-md:max-w-full max-md:px-5"
@@ -97,7 +98,7 @@ export const Login: React.FC = () => {
               aria-label="Mot de passe"
               role="textbox"
               className={
-                (error==true
+                (error == true
                   ? "border-red-500 border-2 border-solid"
                   : "border-2 border-solid") +
                 "self-stretch justify-center mt-3 px-7 py-3 rounded-[100px] items-start max-md:max-w-full max-md:px-5"

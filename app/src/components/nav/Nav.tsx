@@ -1,10 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import { ButtonNav } from "./ButtonNav";
-import { useAuth } from "../../Context/AuthContext";
+import { AuthContext, useAuth } from "../../Context/AuthContext";
 
 export const Nav = (props: any) => {
   const { userEmail, setAuthUser, userPassword, setPwd, setAccessToken } =
-    useAuth();
+    useContext(AuthContext);
   return (
     <div className="flex flex-col items-stretch w-[18%] max-md:w-full max-md:ml-0">
       <div className="bg-white flex w-full grow flex-col pl-4 pr-3 py-11">
