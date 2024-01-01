@@ -35,12 +35,12 @@ export const ItemAttente = () => {
                 500 <span className="text-sm text-zinc-600">FCFA</span>
               </span>
             </div>
-            <button className="justify-between bg-black flex gap-2.5 mt-8 px-4 py-2 rounded-full items-center">
+            <a href="/TaskAttrib" className="justify-between bg-black flex gap-2.5 mt-8 px-4 py-2 rounded-full items-center">
               <img src="/icons/UsersWit.svg" alt="" />
               <span className="text-white text-lg font-semibold self-stretch grow whitespace-nowrap">
                 Attribuer
               </span>
-            </button>
+            </a>
           </div>
         </div>
       </div>

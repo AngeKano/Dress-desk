@@ -1,6 +1,4 @@
-import React from "react";
-import { Status } from "../status/Status";
-import { ItemCpurs } from "./ItemCpurs";
+import { ItemCours } from "./ItemCours";
 
 export const TacheEnCours = () => {
   return (
@@ -16,7 +14,7 @@ export const TacheEnCours = () => {
           <span className="text-sky-500 text-2xl font-bold">2</span>
         </div>
       </div>
-      <ItemCpurs />
+      <ItemCours />
     </div>
   );
 };

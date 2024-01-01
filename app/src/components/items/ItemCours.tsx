@@ -1,7 +1,7 @@
 import React from "react";
 import { Status } from "../status/Status";
 
-export const ItemCpurs = () => {
+export const ItemCours = () => {
   return (
     <div className="justify-center bg-white mt-7 px-5 py-6 rounded-3xl max-md:max-w-full max-md:pl-5">
       <div className="gap-5 flex max-md:flex-col max-md:items-stretch max-md:gap-0">
@@ -32,9 +32,9 @@ export const ItemCpurs = () => {
                 />
                 <button
                   aria-label="Annuler"
-                  className="flex items-center justify-center bg-red-500 rounded-full p-3"
+                  className="flex items-center justify-center bg-red-500 rounded-full p-2"
                 >
-                  <img src="/icons/exit.svg" width={20} height={20} alt="" />
+                  <img src="/icons/exit.svg" width={17} height={17} alt="" />
                 </button>
               </div>
               <div className="text-black text-xl font-semibold mt-24 self-end max-md:mt-10">

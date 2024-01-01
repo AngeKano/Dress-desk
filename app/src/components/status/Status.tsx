@@ -37,5 +37,14 @@ export const Status = (props: any) => {
         </div>
       </div>
     </div>
+  ) : props.type == "Disponible" ? (
+    <div className="flex  flex-col justify-center items-center">
+      <div className="bg-green-500 bg-opacity-20 flex items-stretch justify-between gap-2.5 px-3 py-1 rounded-full">
+        <img src="icons/dash/valid.svg" alt="" />
+        <div className="text-green-600 text-lg font-semibold self-center grow my-auto">
+          Disponible
+        </div>
+      </div>
+    </div>
   ) : null;
 };

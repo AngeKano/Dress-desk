@@ -1,60 +1,12 @@
 import React from "react";
+import { Nav } from "../../components/nav/Nav";
 
 export const DetailEmp = () => {
   return (
     <div className="bg-slate-300">
-      <div className="gap-5 flex max-md:flex-col max-md:items-stretch max-md:gap-0">
-        <div className="flex flex-col items-stretch w-[18%] max-md:w-full max-md:ml-0">
-          <div className="bg-white flex w-full grow flex-col mx-auto pl-4 pr-3 py-11">
-            <div className="self-center flex items-stretch gap-1.5">
-              <div className="text-black text-2xl self-center grow whitespace-nowrap my-auto">
-                DRESS
-              </div>
-            </div>
-            <div className="bg-stone-300 self-stretch shrink-0 h-px mt-12 max-md:mt-10" />
-            <div className="justify-between items-stretch self-stretch flex gap-2.5 mt-10 px-8 py-3 rounded-3xl max-md:mt-10 max-md:px-5">
-              <div className="text-black text-xl font-semibold self-center grow whitespace-nowrap my-auto">
-                Dashboard
-              </div>
-            </div>
-            <div className="justify-between items-stretch self-stretch flex gap-3.5 mt-6 px-8 py-3 rounded-3xl max-md:px-5">
-              <div className="text-black text-right text-xl font-semibold self-center grow whitespace-nowrap my-auto">
-                Liste Tache
-              </div>
-            </div>
-            <div className="justify-between bg-black self-stretch flex gap-5 mt-6 px-8 py-3 rounded-[30px] items-start max-md:px-5">
-              <div className="text-white text-right text-xl font-semibold">
-                Employés
-              </div>
-            </div>
-            <div className="justify-between items-stretch self-stretch flex gap-2.5 mt-6 px-10 py-3 rounded-3xl max-md:px-5">
-              <div className="text-black text-xl font-semibold">Services</div>
-            </div>
-            <div className="justify-between items-stretch self-stretch flex gap-2.5 mt-6 px-8 py-3 rounded-3xl max-md:px-5">
-              <div className="text-black text-xl font-semibold self-center grow whitespace-nowrap my-auto">
-                Notifications
-              </div>
-            </div>
-
-            <div className="text-black text-2xl font-light self-center whitespace-nowrap mt-2">
-              Mlle Elodie
-            </div>
-            <div className="text-black text-2xl font-semibold self-center whitespace-nowrap mt-4">
-              Réceptionniste
-            </div>
-            <div className="justify-between items-stretch self-stretch flex gap-2.5 mt-44 px-8 py-2.5 rounded-3xl max-md:mt-10 max-md:px-5">
-              <div className="text-black text-xl font-semibold self-center grow whitespace-nowrap my-auto">
-                Paramètre
-              </div>
-            </div>
-            <div className="justify-between items-stretch self-stretch flex gap-2.5 mt-8 px-8 py-3 rounded-3xl max-md:px-5">
-              <div className="text-black text-xl font-semibold grow whitespace-nowrap self-start">
-                Deconnexion
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className="flex flex-col items-stretch w-[82%] ml-5 max-md:w-full max-md:ml-0">
+      <div className=" flex max-md:flex-col max-md:items-stretch max-md:gap-0">
+        <Nav Lien="Employés" />
+        <div className="flex flex-col items-stretch w-[82%] max-md:w-full max-md:ml-0">
           <div className="bg-white flex grow flex-col items-stretch w-full pl-14 pr-20 py-11 border-l-stone-300 border-l border-solid max-md:max-w-full max-md:px-5">
             <div className="mr-6 max-md:max-w-full max-md:mr-2.5">
               <div className="gap-5 flex max-md:flex-col max-md:items-stretch max-md:gap-0">
