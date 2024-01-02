@@ -64,7 +64,7 @@ export const Nav = (props: any) => {
           <div className="flex flex-col justify-center items-center">
             <img src="/users/7.png" width={70} height={70} alt="" />
             <span className="text-black font-Poppins text-2xl font-light self-center whitespace-nowrap ">
-              {userEmail}
+              {sessionStorage.getItem("email")}
             </span>
             <span className="text-black font-Poppins text-2xl font-semibold self-center whitespace-nowrap ">
               Réceptionniste

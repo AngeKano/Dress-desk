@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
@@ -23,25 +23,24 @@ root.render(
   <React.StrictMode>
     <AuthProvider>
       <div className="font-Poppins">
-         <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Layout />} />
-          <Route path="/Login" element={<Login />} />
-          <Route path="/Dashboard" element={<Dashboard />} />
-          {/* Commande */}
-          <Route path="/AddCommand" element={<AddCommand />} />
-          <Route path="/DetailCommand" element={<DetailCommand />} />
-          {/* Employes */}
-          <Route path="/AddEmp" element={<AddEmp />} />
-          <Route path="/DetailEmp" element={<DetailEmp />} />
-          <Route path="/EmpList" element={<EmpList />} />
-          {/* Task */}
-          <Route path="/TaskList" element={<TaskList />} />
-          <Route path="/TaskAttrib" element={<TaskAttrib />} />
-        </Routes>
-      </BrowserRouter>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" Component={Layout} />
+            <Route path="/Login" element={<Login />} />
+            <Route path="/Dashboard" element={<Dashboard />} />
+            {/* Commande */}
+            <Route path="/AddCommand" element={<AddCommand />} />
+            <Route path="/DetailCommand" element={<DetailCommand />} />
+            {/* Employes */}
+            <Route path="/AddEmp" element={<AddEmp />} />
+            <Route path="/DetailEmp" element={<DetailEmp />} />
+            <Route path="/EmpList" element={<EmpList />} />
+            {/* Task */}
+            <Route path="/TaskList" element={<TaskList />} />
+            <Route path="/TaskAttrib" element={<TaskAttrib />} />
+          </Routes>
+        </BrowserRouter>
       </div>
-     
     </AuthProvider>
   </React.StrictMode>
 );

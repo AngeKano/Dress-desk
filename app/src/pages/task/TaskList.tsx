@@ -22,8 +22,6 @@ export const TaskList = () => {
     <div className="bg-slate-300">
       <div className=" flex max-md:flex-col max-md:items-stretch max-md:gap-0">
         <Nav Lien="Liste Tache" />
-        <p>{userEmail} qsd sd sd sdsd</p>
-        <p>{accessToken}</p>
         <div className="flex flex-col items-stretch w-[82%] max-md:w-full max-md:ml-0">
           <div className="bg-white flex grow flex-col w-full pl-10 pr-20 pt-9 border-l-stone-300 border-l border-solid items-end max-md:max-w-full max-md:px-5">
             <HeaderNav />

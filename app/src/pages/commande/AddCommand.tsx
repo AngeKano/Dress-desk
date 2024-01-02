@@ -1,13 +1,43 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Nav } from "../../components/nav/Nav";
 import { HeaderNav } from "../../components/nav/HeaderNav";
 import { HeaderTxt } from "../../components/nav/HeaderTxt";
+import { useNavigate } from "react-router-dom";
+import { _onSubmitAdd } from "../../components/api/RequestApi";
 
 export const AddCommand = () => {
-  const [nbr, setNbr] = useState(1);
-  const [nomClient, setNomClient] = useState("");
+  let yourDate = new Date();
+  let date = yourDate.toISOString().split("T")[0];
+  const [clientNames, setClientNames] = useState(String);
+  const [commandeDateDepot, setCommandeDateDepot] = useState(date);
+  const [commandeStatut, setCommandeStatut] = useState("En traitement");
+  const [detailsCommandeQuantite, setDetailsCommandeQuantite] = useState(1);
+  const [detailsCommandeNote, setDetailsCommandeNote] = useState(String);
+  const [articleService, setArticleService] = useState(1);
+
+  const navigate = useNavigate();
+
+  const _onSubmit = async () => {
+    try {
+      const res = await _onSubmitAdd({
+        // Api COMMANDE
+        commandeStatut: commandeStatut,
+        commandeDateDepot: commandeDateDepot,
+        clientNames: clientNames,
+        // Api DETAILS COMMANDE
+        detailsCommandeQuantite: detailsCommandeQuantite,
+        detailsCommandeNote: detailsCommandeNote,
+        articleService: articleService,
+      });
+      res == 201 ? navigate("/Dashboard") : null;
+    } catch (Err) {
+      console.log(Err);
+    }
+  };
+
   return (
     <div className="bg-slate-300">
+      {sessionStorage.getItem("accessToken")}
       <div className="flex max-md:flex-col max-md:items-stretch max-md:gap-0">
         <Nav Lien="Dashboard" />
         <div className="flex flex-col items-stretch w-[82%] max-md:w-full max-md:ml-0">
@@ -37,8 +67,8 @@ export const AddCommand = () => {
                       Les nom et l’identifiant du client sont unique
                     </span>
                     <input
-                      value={nomClient}
-                      onChange={(e) => setNomClient(e.target.value)}
+                      value={clientNames}
+                      onChange={(e) => setClientNames(e.target.value)}
                       placeholder="James"
                       className="bg-gray-100 px-5 flex w-[255px] shrink-0 max-w-full h-11 flex-col mt-3.5 rounded-[121px] self-start"
                     />
@@ -57,9 +87,9 @@ export const AddCommand = () => {
                     <div className="flex items-stretch justify-between gap-5 mt-5 self-start">
                       <div className="text-black text-md font-medium bg-gray-200 grow justify-center items-center px-11 py-2 rounded-full max-md:px-5">
                         com-
-                        {!nomClient.toLowerCase()
+                        {!clientNames.toLowerCase()
                           ? "null"
-                          : nomClient.toLowerCase()}
+                          : clientNames.toLowerCase()}
                         -1
                       </div>
                     </div>
@@ -76,24 +106,32 @@ export const AddCommand = () => {
                       </div>
                       <div className="self-center flex items-center justify-between gap-5 mt-6">
                         <button
+                          aria-label="plus"
                           onClick={() => {
-                            setNbr(nbr + 1);
+                            setDetailsCommandeQuantite(
+                              detailsCommandeQuantite + 1
+                            );
                           }}
                           className="rounded-full p-3 items-center justify-center bg-zinc-200"
                         >
-                          {""}
                           <img src="/icons/Plus.svg" alt="" />
                         </button>
                         <span className="text-black text-xl font-medium my-auto">
-                          {nbr}
+                          {detailsCommandeQuantite}
                         </span>
                         <button
+                          aria-label="moins"
                           onClick={() => {
-                            nbr > 1 ? setNbr(nbr - 1) : setNbr(nbr);
+                            detailsCommandeQuantite > 1
+                              ? setDetailsCommandeQuantite(
+                                  detailsCommandeQuantite - 1
+                                )
+                              : setDetailsCommandeQuantite(
+                                  detailsCommandeQuantite
+                                );
                           }}
                           className="rounded-full p-3 items-center justify-center bg-zinc-200"
                         >
-                          {""}
                           <img src="/icons/Moins.svg" alt="" />
                         </button>
                       </div>
@@ -105,8 +143,8 @@ export const AddCommand = () => {
                       </div>
                       <div className="text-black text-sm self-center font-light mt-7 max-md:mt-10">
                         <span className="font-semibold text-4xl">
-                          {nbr * 100}
-                        </span>{" "}
+                          {detailsCommandeQuantite * 100}
+                        </span>
                         <span className="text-xl">FCFA</span>
                       </div>
                     </div>
@@ -122,6 +160,10 @@ export const AddCommand = () => {
               information nécessaire pour son traitement
             </div>
             <textarea
+              value={detailsCommandeNote}
+              onChange={(e) => {
+                setDetailsCommandeNote(e.target.value);
+              }}
               aria-label="Description"
               className="bg-gray-100 p-3 self-stretch flex shrink-0 h-[199px] flex-col mt-5 rounded-3xl max-md:max-w-full"
             />
@@ -134,7 +176,10 @@ export const AddCommand = () => {
                   Validation
                 </div>
               </button>
-              <button className="text-white text-xl font-semibold  justify-center items-center bg-black self-stretch grow px-5 py-2 rounded-[30px] max-md:pr-5">
+              <button
+                onClick={() => _onSubmit()}
+                className="text-white text-xl font-semibold  justify-center items-center bg-black self-stretch grow px-5 py-2 rounded-[30px] max-md:pr-5"
+              >
                 Enregistrer
               </button>
             </div>

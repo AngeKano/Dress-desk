@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Nav } from "../components/nav/Nav";
 import { HeaderNav } from "../components/nav/HeaderNav";
 import { HeaderTxt } from "../components/nav/HeaderTxt";
@@ -6,6 +6,7 @@ import { HeaderStat } from "../components/nav/HeaderStat";
 import { ItemsCommd } from "../components/nav/items/ItemsCommd";
 
 export const Dashboard = () => {
+  useEffect(() => {}, []);
   return (
     <div className="bg-slate-300">
       <div className=" flex max-md:flex-col max-md:items-stretch max-md:gap-0">
@@ -36,8 +37,7 @@ export const Dashboard = () => {
             </div>
 
             {/* Listes */}
-
-            <ItemsCommd />
+            {<ItemsCommd />}
           </div>
         </div>
       </div>

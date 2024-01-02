@@ -11,8 +11,8 @@ export const TacheEnAttente = () => {
             En attente
           </span>
         </div>
-        <div className=" bg-black self-stretch flex justify-center items-center w-11 h-11 rounded-full">
-          <span className="text-white text-2xl font-bold">3</span>
+        <div className=" bg-black self-stretch flex justify-center items-center w-9 h-9 rounded-full">
+          <span className="text-white text-xl font-bold">1</span>
         </div>
       </div>
       <ItemAttente/>

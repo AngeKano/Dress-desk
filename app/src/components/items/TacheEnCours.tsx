@@ -10,8 +10,8 @@ export const TacheEnCours = () => {
             En cours
           </span>
         </div>
-        <div className=" bg-sky-200 self-stretch flex justify-center items-center w-11 h-11 rounded-full">
-          <span className="text-sky-500 text-2xl font-bold">2</span>
+        <div className=" bg-sky-200 self-stretch flex justify-center items-center w-9 h-9 rounded-full">
+          <span className="text-sky-500 text-xl font-bold">1</span>
         </div>
       </div>
       <ItemCours />

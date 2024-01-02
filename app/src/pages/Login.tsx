@@ -1,13 +1,12 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import axios from "../api/axios";
 import { useNavigate } from "react-router-dom";
-import { AuthContext } from "../Context/AuthContext";
 
 export const Login: React.FC = () => {
   const electron = (window as any).electron;
 
-  const { userEmail, setAuthUser, userPassword, setPwd, setAccessToken, } =
-    useContext(AuthContext);
+  const [userEmail, setUserEmail] = useState(String);
+  const [userPassword, setUserPassword] = useState(String);
   const REGISTER_URL = "/auth/login";
   const [error, setError] = useState(false);
 
@@ -23,12 +22,13 @@ export const Login: React.FC = () => {
           withCredentials: true,
         }
       );
-      setAccessToken(res.data.token);
+      sessionStorage.setItem("userEmail", userEmail);
+      sessionStorage.setItem("userPassword", userPassword);
+      sessionStorage.setItem("accessToken", res.data.token);
       navigate("/Dashboard");
     } catch (err) {
-      setAuthUser(null);
-      setPwd(null);
-      setAccessToken(null);
+      setUserEmail("");
+      setUserPassword("");
       setError(true);
       console.log("Impossible de se connecter 🔴");
     }
@@ -82,10 +82,9 @@ export const Login: React.FC = () => {
                 " self-stretch justify-center mt-3 px-7 py-3 rounded-[100px] items-start max-md:max-w-full max-md:px-5"
               }
               placeholder="EX: KANG@2023147"
-              onChange={(e) => setAuthUser(e.target.value)}
+              onChange={(e) => setUserEmail(e.target.value)}
               value={userEmail}
             />
-
             <div className="text-black text-2xl font-medium self-stretch mt-10 max-md:max-w-full font-['Poppins'] ">
               Mot de passse
             </div>
@@ -104,7 +103,7 @@ export const Login: React.FC = () => {
                 "self-stretch justify-center mt-3 px-7 py-3 rounded-[100px] items-start max-md:max-w-full max-md:px-5"
               }
               placeholder="Au moins 8 caractères aplha-numerique"
-              onChange={(e) => setPwd(e.target.value)}
+              onChange={(e) => setUserPassword(e.target.value)}
               value={userPassword}
             />
 
