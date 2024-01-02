@@ -69,3 +69,42 @@ export const _onSubmitAdd = async (props: any) => {
     console.log(err);
   }
 };
+
+///Add Employe
+
+export const _onSubmitAddEmp = async (props: any) => {
+  const REGISTER_URL_EMPLOYES = "/employe";
+
+  //Variable use to add Employe
+  const employeNames = props.employeNames;
+  const employeFonction = props.employeFonction;
+  const employeSalaire = props.employeSalaire;
+
+  const employeDateEmbauche = props.employeDateEmbauche;
+  const employeStatut = props.employeStatut;
+
+  try {
+    const resEmploye = await axios.post(
+      REGISTER_URL_EMPLOYES,
+      JSON.stringify({
+        employeNames,
+        employeFonction,
+        employeSalaire,
+        employeDateEmbauche,
+        employeStatut,
+      }),
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${sessionStorage.getItem("accessToken")}`,
+        },
+        withCredentials: true,
+      }
+    );
+    console.log("Add command succeseful ✅ IdCommand: ", resEmploye.data);
+    return resEmploye.status;
+  } catch (err) {
+    console.log("Impossible d'enregistrer une commande 🔴");
+    console.log(err);
+  }
+};

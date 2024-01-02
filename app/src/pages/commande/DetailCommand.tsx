@@ -1,10 +1,44 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Nav } from "../../components/nav/Nav";
 import { HeaderNav } from "../../components/nav/HeaderNav";
 import { HeaderTxt } from "../../components/nav/HeaderTxt";
 import { Status } from "../../components/status/Status";
+import axios from "../../api/axios";
 
 export const DetailCommand = (props: any) => {
+  const [detailCommand, setDetailCommand] = useState({
+    commandeDateDepot: [],
+    commandeStatut: "",
+    detailsCommandes: [
+      {
+        idDetailsCommande: 0,
+        detailsCommandeQuantite: 0,
+        detailsCommandeNote: "",
+        prixTotal: 0.0,
+      },
+    ],
+    idCommande: 0,
+    numeroCommande: "",
+    paiements: [],
+  });
+  const REGISTER_URL = "/commande";
+  useEffect(() => {
+    axios
+      .get(REGISTER_URL, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${sessionStorage.getItem("accessToken")}`,
+        },
+        withCredentials: true,
+      })
+      .then((res) => {
+        res.data.map((index: any, key: any) =>
+          index.idCommande == sessionStorage.getItem("idCommande")
+            ? setDetailCommand(index)
+            : null
+        );
+      });
+  }, []);
   return (
     <div className="bg-slate-300">
       <div className=" flex max-md:flex-col max-md:items-stretch max-md:gap-0">
@@ -84,7 +118,7 @@ export const DetailCommand = (props: any) => {
                   Date du dépôt des vêtements
                 </div>
                 <div className="text-black text-lg font-medium mt-7 max-md:mt-10">
-                  Statuts de la commande{" "}
+                  Statuts de la commande
                 </div>
                 <div className="text-black text-lg font-medium mt-7 max-md:mt-10">
                   Employés en charge
@@ -92,20 +126,28 @@ export const DetailCommand = (props: any) => {
               </div>
               <div className="flex flex-col mt-1">
                 <div className="text-zinc-600 text-2xl font-semibold whitespace-nowrap self-end">
-                  <span className="text-4xl">500 </span>
+                  <span className="text-4xl">
+                    {detailCommand.detailsCommandes[0].prixTotal}
+                  </span>
                   <span className="font-medium text-zinc-600">FCFA</span>
                 </div>
                 <span className="text-black text-xl font-medium self-end mt-7 max-md:mt-10">
-                  com-james-1
+                  {detailCommand.numeroCommande}
                 </span>
                 <div className="self-stretch flex flex-col mt-7 pl-20 items-end max-md:pl-5">
-                  <span className="text-black text-lg font-semibold ">x5</span>
+                  <span className="text-black text-lg font-semibold ">
+                    {detailCommand.detailsCommandes[0].detailsCommandeQuantite}
+                  </span>
                   <span className="text-black text-lg font-semibold self-end mt-7 max-md:ml-0.5">
-                    15-12-23
+                    {detailCommand.commandeDateDepot[0] +
+                      "-" +
+                      detailCommand.commandeDateDepot[1] +
+                      "-" +
+                      detailCommand.commandeDateDepot[2]}
                   </span>
                 </div>
                 <div className=" self-end flex items-stretch justify-between gap-2.5 mt-7   rounded-[100px] max-md:px-5">
-                  <Status type="En cours" />
+                  <Status type={detailCommand.commandeStatut} />
                 </div>
                 <div className="self-stretch flex items-stretch justify-between gap-2 mt-7">
                   <img src="/Users/5.png" width={40} height={40} alt="" />
@@ -119,8 +161,8 @@ export const DetailCommand = (props: any) => {
               Descriptions de la commande :
             </div>
             <textarea
-              placeholder="ef"
-              value={"Pantalons 2 Chemise 3 : "}
+              placeholder="Description"
+              value={detailCommand.detailsCommandes[0].detailsCommandeNote}
               className="text-black text-lg bg-gray-200 self-stretch mt-3.5 mx-5 pl-6 pr-16 pt-6 pb-10 rounded-3xl items-start max-md:max-w-full max-md:mr-2.5 max-md:px-5"
             ></textarea>
           </div>

@@ -29,7 +29,7 @@ export const AddCommand = () => {
         detailsCommandeNote: detailsCommandeNote,
         articleService: articleService,
       });
-      res == 201 ? navigate("/Dashboard") : null;
+      navigate("/Dashboard");
     } catch (Err) {
       console.log(Err);
     }
@@ -168,9 +168,12 @@ export const AddCommand = () => {
               className="bg-gray-100 p-3 self-stretch flex shrink-0 h-[199px] flex-col mt-5 rounded-3xl max-md:max-w-full"
             />
             <div className="flex items-center justify-between gap-5 mr-6 mt-14 self-end max-md:max-w-full max-md:flex-wrap max-md:mr-2.5 max-md:mt-10">
-              <button className="text-black text-xl font-semibold grow  ">
+              <a
+                href="/Dashboard"
+                className="text-black text-xl font-semibold grow  "
+              >
                 Annuler
-              </button>
+              </a>
               <button className="justify-between items-stretch self-stretch flex gap-2.5 px-7 py-2 rounded-3xl max-md:px-5">
                 <div className="text-black text-xl font-semibold grow  self-start">
                   Validation

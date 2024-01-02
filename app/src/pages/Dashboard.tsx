@@ -1,12 +1,27 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Nav } from "../components/nav/Nav";
 import { HeaderNav } from "../components/nav/HeaderNav";
 import { HeaderTxt } from "../components/nav/HeaderTxt";
 import { HeaderStat } from "../components/nav/HeaderStat";
 import { ItemsCommd } from "../components/nav/items/ItemsCommd";
+import axios from "../api/axios";
 
 export const Dashboard = () => {
-  useEffect(() => {}, []);
+  const [listCommand, setListeCommand] = useState([]);
+  const REGISTER_URL = "/commande";
+  useEffect(() => {
+    axios
+      .get(REGISTER_URL, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${sessionStorage.getItem("accessToken")}`,
+        },
+        withCredentials: true,
+      })
+      .then((res) => setListeCommand(res.data))
+      .then((res) => console.log(listCommand))
+      .catch((e) => console.log(e));
+  }, []);
   return (
     <div className="bg-slate-300">
       <div className=" flex max-md:flex-col max-md:items-stretch max-md:gap-0">
@@ -37,7 +52,24 @@ export const Dashboard = () => {
             </div>
 
             {/* Listes */}
-            {<ItemsCommd />}
+
+            {listCommand.length != 0 ? (
+              listCommand.map((index: any, key: any) => (
+                <ItemsCommd
+                  key={index.idCommande}
+                  idCommande={index.idCommande}
+                  numeroCommande={index.numeroCommande}
+                  detailsCommandes={index.detailsCommandes}
+                  commandeStatut={index.commandeStatut}
+                  commandeDateDepot={index.commandeDateDepot}
+
+                />
+              ))
+            ) : (
+              <span className="self-center font-light mt-10 text-zinc-500 ">
+                Aucune commande
+              </span>
+            )}
           </div>
         </div>
       </div>

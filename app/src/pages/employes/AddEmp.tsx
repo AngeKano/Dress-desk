@@ -1,9 +1,37 @@
-import React from "react";
+import React, { useState } from "react";
 import { Nav } from "../../components/nav/Nav";
 import { HeaderNav } from "../../components/nav/HeaderNav";
 import { HeaderTxt } from "../../components/nav/HeaderTxt";
+import { useNavigate } from "react-router-dom";
+import { _onSubmitAddEmp } from "../../components/api/RequestApi";
 
 export const AddEmp = () => {
+  let yourDate = new Date();
+  let date = yourDate.toISOString().split("T")[0];
+  const [employeNames, setEmployeNames] = useState("");
+  const [employeFonction, setEmployeFonction] = useState("");
+  const [employeSalaire, setEmployeSalaire] = useState(Number);
+  const [employeDateEmbauche, setEmployeDateEmbauche] = useState(date);
+  const [employeStatut, setEmployeStatut] = useState("Disponible");
+
+  const navigate = useNavigate();
+
+  const _onSubmit = async () => {
+    try {
+      const res = await _onSubmitAddEmp({
+        // Api Employes
+        employeNames: employeNames,
+        employeFonction: employeFonction,
+        employeSalaire: employeSalaire,
+        employeDateEmbauche: employeDateEmbauche,
+        employeStatut: employeStatut,
+      });
+      navigate("/EmpList");
+    } catch (Err) {
+      console.log(Err);
+    }
+  };
+
   return (
     <div className="bg-slate-300">
       <div className="flex max-md:flex-col max-md:items-stretch max-md:gap-0">
@@ -40,6 +68,8 @@ export const AddEmp = () => {
                           <input
                             aria-label="Nom"
                             className="bg-gray-100 flex h-11 mt-2 rounded-full w-fit px-3"
+                            value={employeNames}
+                            onChange={(e) => setEmployeNames(e.target.value)}
                           />
                           <span className="text-black text-lg font-medium self-stretch mt-7">
                             Poste
@@ -50,6 +80,8 @@ export const AddEmp = () => {
                           <input
                             aria-label="Nom"
                             className="bg-gray-100 flex h-11 mt-2 rounded-full w-fit px-3"
+                            value={employeFonction}
+                            onChange={(e) => setEmployeFonction(e.target.value)}
                           />
                           <span className="text-black text-lg font-medium self-stretch mt-6">
                             Numéro de téléphone
@@ -67,45 +99,24 @@ export const AddEmp = () => {
                             />
                           </div>
                           <span className="text-black text-lg font-medium self-stretch mt-7">
-                            Lieu d’habitation
+                            Salaire
                           </span>
                           <span className="text-zinc-600 text-sm font-light ">
-                            Zone actuelle de résidence
+                            Salaire de l'employé en mois
                           </span>
                           <input
-                            aria-label="Nom"
+                            aria-label="Salaire"
                             className="bg-gray-100 flex h-11 mt-2 rounded-full w-fit px-3"
+                            value={employeSalaire}
+                            onChange={(e) =>
+                              setEmployeSalaire(Number(e.target.value))
+                            }
                           />
                           <span className="text-black text-lg font-medium self-stretch mt-6">
                             Numéro de CNI
                           </span>
                           <span className="text-zinc-600 text-sm font-light ">
                             A enregistrer sous réserve de la pièce physique
-                          </span>
-                          <input
-                            aria-label="Nom"
-                            className="bg-gray-100 flex h-11 mt-2 rounded-full w-fit px-3 "
-                          />
-                        </div>
-                      </div>
-                      <div className="flex flex-col items-stretch  max-md:w-full max-md:ml-0">
-                        <div className="flex grow flex-col items-stretch mt-96 max-md:mt-10">
-                          <span className="text-black text-lg font-medium whitespace-nowrap">
-                            Date de naissance
-                          </span>
-                          <span className="text-zinc-600 text-sm font-light">
-                            Format XX/XX/XXXX
-                          </span>
-                          <input
-                            aria-label="Nom"
-                            type="date"
-                            className="bg-gray-100 flex h-11 mt-2 rounded-full w-fit px-3 "
-                          />
-                          <span className="text-black text-lg font-medium mt-6">
-                            Autres document
-                          </span>
-                          <span className="text-zinc-600 text-sm font-light">
-                            Passeport, récépissé ou autres...
                           </span>
                           <input
                             aria-label="Nom"
@@ -155,7 +166,10 @@ export const AddEmp = () => {
                       <button className="text-black text-lg font-semibold px-4 py-2">
                         Annuler
                       </button>
-                      <button className="text-white text-lg font-semibold justify-center items-center bg-black self-center px-4 py-2 rounded-full max-md:pr-5">
+                      <button
+                        onClick={_onSubmit}
+                        className="text-white text-lg font-semibold justify-center items-center bg-black self-center px-4 py-2 rounded-full max-md:pr-5"
+                      >
                         Enregistrer
                       </button>
                     </div>

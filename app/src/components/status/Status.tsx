@@ -1,7 +1,7 @@
 import React from "react";
 
 export const Status = (props: any) => {
-  return props.type == "En cours" ? (
+  return props.type == "En traitement" ? (
     <div className="flex  flex-col justify-center items-center">
       <div className="bg-sky-500 bg-opacity-20 flex items-stretch justify-between gap-2.5 px-3 py-1 rounded-full">
         <img src="icons/dash/timeBlue.svg" alt="" />

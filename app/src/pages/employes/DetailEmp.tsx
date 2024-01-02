@@ -1,9 +1,38 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Nav } from "../../components/nav/Nav";
 import { HeaderNav } from "../../components/nav/HeaderNav";
 import { HeaderTxt } from "../../components/nav/HeaderTxt";
+import axios from "../../api/axios";
+import { StatusEmp } from "../../components/status/StatusEmp";
 
 export const DetailEmp = () => {
+  const [detailEmploye, setDetaiilEmploye] = useState({
+    idEmploye: 3,
+    employeNames: "",
+    employeFonction: "",
+    employeSalaire: 0.0,
+    employeStatut: "Disponible",
+    employeDateEmbauche: [],
+  });
+
+  const REGISTER_URL_EMPLOYE = "/employe";
+  useEffect(() => {
+    axios
+      .get(REGISTER_URL_EMPLOYE, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${sessionStorage.getItem("accessToken")}`,
+        },
+        withCredentials: true,
+      })
+      .then((res) => {
+        res.data.map((index: any, key: any) =>
+          index.idEmploye == sessionStorage.getItem("idEmploye")
+            ? setDetaiilEmploye(index)
+            : null
+        );
+      });
+  }, []);
   return (
     <div className="bg-slate-300">
       <div className=" flex max-md:flex-col max-md:items-stretch max-md:gap-0">
@@ -28,15 +57,15 @@ export const DetailEmp = () => {
                       </span>
                     </div>
                     <div className="flex items-stretch justify-between gap-4 mt-7 max-md:mt-5">
-                      <img src="/Users/8.png" alt="" />
+                      <img src="/Users/6.png" alt="" />
                       <div className="self-center flex grow basis-[0%] flex-col items-stretch my-auto">
                         <span className="text-black text-2xl font-semibold">
-                          Ange Kano
+                          {detailEmploye.employeNames}
                         </span>
                         <div className="flex self-start items-center justify-center gap-5 mt-3.5">
                           <div className="flex grow flex-col justify-center items-center">
                             <span className="text-black text-sm font-light bg-gray-200 justify-center items-center p-3 rounded-full">
-                              EDGTSPQDRESS151223000
+                              {detailEmploye.employeSalaire} FCFA
                             </span>
                           </div>
                           <img src="/icons/Edit.svg" alt="" />
@@ -95,7 +124,7 @@ export const DetailEmp = () => {
                         <div className="flex flex-col items-stretch w-[54%] ml-5 max-md:w-full max-md:ml-0">
                           <div className="flex grow flex-col items-stretch max-md:mt-9">
                             <span className="text-black text-lg">
-                              Repasseur
+                              {detailEmploye.employeFonction}
                             </span>
                             <span className="text-black text-lg whitespace-nowrap mt-8">
                               (+225)0151831681 / 78759944
@@ -116,23 +145,30 @@ export const DetailEmp = () => {
                           Date de recrutement
                         </span>
                         <span className="text-black text-xl font-semibold mt-10">
-                          Mot de passe{" "}
+                          Statuts
                         </span>
                       </div>
-                      <div className="flex grow basis-[0%] flex-col items-stretch self-start">
+                      <div className="flex grow basis-[0%] w-auto flex-col items-stretch self-start">
                         <span className="text-black text-lg">
-                          10 Decmbre 2023
+                          {detailEmploye.employeDateEmbauche[0] +
+                            "-" +
+                            detailEmploye.employeDateEmbauche[1] +
+                            "-" +
+                            detailEmploye.employeDateEmbauche[2]}
                         </span>
-                        <span className="text-black text-lg mt-10 max-md:mt-10">
-                          Ang*****************
-                        </span>
+                        {/*  */}
+                        <div className="mt-8  w-fit">
+                          <StatusEmp
+                            employeStatut={detailEmploye.employeStatut}
+                          />
+                        </div>
                       </div>
                     </div>
                     <div className="text-black text-sm font-light self-stretch mt-8 max-md:max-w-full">
                       <span className="">
                         NB: Mot de passe est modifiable que par l’admin ou autre
                         personne en charge de gérer les effectifs de
-                        l’entreprise sous autorisation de l’admin{" "}
+                        l’entreprise sous autorisation de l’admin
                       </span>
                     </div>
                     <div className="flex w-[463px] max-w-full items-stretch justify-between gap-5 mt-16 self-end max-md:flex-wrap max-md:mt-10">
