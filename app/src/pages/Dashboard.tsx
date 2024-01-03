@@ -19,7 +19,6 @@ export const Dashboard = () => {
         withCredentials: true,
       })
       .then((res) => setListeCommand(res.data))
-      .then((res) => console.log(listCommand))
       .catch((e) => console.log(e));
   }, []);
   return (

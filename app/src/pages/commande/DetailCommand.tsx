@@ -7,21 +7,40 @@ import axios from "../../api/axios";
 
 export const DetailCommand = (props: any) => {
   const [detailCommand, setDetailCommand] = useState({
-    commandeDateDepot: [],
-    commandeStatut: "",
+    idCommande: 0,
+    commandeStatut: "En traitement",
+    commandeDateDepot: [0, 0, 0],
+    numeroCommande: "com-Null-0",
     detailsCommandes: [
       {
-        idDetailsCommande: 0,
-        detailsCommandeQuantite: 0,
-        detailsCommandeNote: "",
-        prixTotal: 0.0,
+        idDetailsCommande: 3,
+        detailsCommandeQuantite: 2,
+        detailsCommandeNote: "ssd sds",
+        prixTotal: 200.0,
       },
     ],
-    idCommande: 0,
-    numeroCommande: "",
     paiements: [],
+    client: {
+      idUser: 52,
+      userPassword: "Null",
+      userEmail: "Null",
+      userNames: "Null",
+      statutConnexion: "Null",
+      dateInscription: [2024, 1, 3],
+      role: "NULL",
+      clientAdresse: "Daloa",
+      clientTelephone: "+2250768790582",
+      commandes: [],
+      enabled: true,
+      password: "$2a$10$BPhh6yIBHCaee54uLLrxmuSuvTntoS0a30rIwIOTsP1EmElIjpbJK",
+      username: "chrishine@example.com",
+      accountNonLocked: true,
+      authorities: [],
+      accountNonExpired: true,
+      credentialsNonExpired: true,
+    },
   });
-  const REGISTER_URL = "/commande";
+  const REGISTER_URL = `/commande/${sessionStorage.getItem("idCommande")}`;
   useEffect(() => {
     axios
       .get(REGISTER_URL, {
@@ -31,13 +50,7 @@ export const DetailCommand = (props: any) => {
         },
         withCredentials: true,
       })
-      .then((res) => {
-        res.data.map((index: any, key: any) =>
-          index.idCommande == sessionStorage.getItem("idCommande")
-            ? setDetailCommand(index)
-            : null
-        );
-      });
+      .then((res) => setDetailCommand(res.data));
   }, []);
   return (
     <div className="bg-slate-300">
@@ -126,9 +139,7 @@ export const DetailCommand = (props: any) => {
               </div>
               <div className="flex flex-col mt-1">
                 <div className="text-zinc-600 text-2xl font-semibold whitespace-nowrap self-end">
-                  <span className="text-4xl">
-                    {detailCommand.detailsCommandes[0].prixTotal}
-                  </span>
+                  <span className="text-4xl">{detailCommand.prixTotal}</span>
                   <span className="font-medium text-zinc-600">FCFA</span>
                 </div>
                 <span className="text-black text-xl font-medium self-end mt-7 max-md:mt-10">
@@ -136,14 +147,10 @@ export const DetailCommand = (props: any) => {
                 </span>
                 <div className="self-stretch flex flex-col mt-7 pl-20 items-end max-md:pl-5">
                   <span className="text-black text-lg font-semibold ">
-                    {detailCommand.detailsCommandes[0].detailsCommandeQuantite}
+                    {detailCommand.detailsCommandeQuantite}
                   </span>
                   <span className="text-black text-lg font-semibold self-end mt-7 max-md:ml-0.5">
-                    {detailCommand.commandeDateDepot[0] +
-                      "-" +
-                      detailCommand.commandeDateDepot[1] +
-                      "-" +
-                      detailCommand.commandeDateDepot[2]}
+                    {/*qsd*/}
                   </span>
                 </div>
                 <div className=" self-end flex items-stretch justify-between gap-2.5 mt-7   rounded-[100px] max-md:px-5">

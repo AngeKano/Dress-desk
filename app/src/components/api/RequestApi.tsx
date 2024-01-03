@@ -10,24 +10,27 @@ export const RequestApi = () => {
 
 const REGISTER_URL_COMMANDE = "/commande";
 const REGISTER_URL_DETAILS_COMMANDE = "/details-commande";
-export const _onSubmitAdd = async (props: any) => {
+export const _onSubmitAddCommand = async (props: any) => {
   //Variable use to add command
   const commandeStatut = props.commandeStatut;
   const commandeDateDepot = props.commandeDateDepot;
-  const clientNames = props.clientNames;
+  const clientEmail = props.clientEmail;
 
-  //UseSate IdCommand
-  let fkCommandeDetailsCommande;
+  //UseSate   NumeroCommand
+  const clientName = props.clientName;
+  const nbrCommand = props.nbrCommand;
 
+  // let numeroCommande = "com-" + clientName + "-" + nbrCommand;
   //Variable use to add details of command
   const detailsCommandeQuantite = props.detailsCommandeQuantite;
   const detailsCommandeNote = props.detailsCommandeNote;
-  const articleService = props.articleService;
+  const articleservice = props.articleservice;
+  let numeroCommande;
 
   try {
     const resCommande = await axios.post(
       REGISTER_URL_COMMANDE,
-      JSON.stringify({ commandeStatut, commandeDateDepot, clientNames }),
+      JSON.stringify({ commandeStatut, commandeDateDepot, clientEmail }),
       {
         headers: {
           "Content-Type": "application/json",
@@ -36,19 +39,29 @@ export const _onSubmitAdd = async (props: any) => {
         withCredentials: true,
       }
     );
-    console.log(
-      "Add command succeseful ✅ IdCommand: ",
-      resCommande.data.idCommande
-    );
+    console.log("Add command succeseful ✅ IdCommand: ", resCommande.data);
 
-    fkCommandeDetailsCommande = resCommande.data.idCommande;
+    numeroCommande = resCommande.data.numeroCommande;
+    console.log(
+      "Contenue Variable : --",
+      detailsCommandeQuantite,
+      detailsCommandeNote,
+      numeroCommande,
+      articleservice,
+
+      "Type de variable : --",
+      typeof detailsCommandeQuantite,
+      typeof detailsCommandeNote,
+      typeof numeroCommande,
+      typeof articleservice
+    );
     const resDetailsCommande = await axios.post(
       REGISTER_URL_DETAILS_COMMANDE,
       JSON.stringify({
         detailsCommandeQuantite,
         detailsCommandeNote,
-        fkCommandeDetailsCommande,
-        articleService,
+        numeroCommande,
+        articleservice,
       }),
       {
         headers: {
@@ -62,7 +75,6 @@ export const _onSubmitAdd = async (props: any) => {
       "Add details of command succeseful ✅ Content Details: ",
       resDetailsCommande
     );
-
     return resCommande.status;
   } catch (err) {
     console.log("Impossible d'enregistrer une commande 🔴");

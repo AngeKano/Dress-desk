@@ -1,33 +1,99 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Nav } from "../../components/nav/Nav";
 import { HeaderNav } from "../../components/nav/HeaderNav";
 import { HeaderTxt } from "../../components/nav/HeaderTxt";
 import { useNavigate } from "react-router-dom";
-import { _onSubmitAdd } from "../../components/api/RequestApi";
+import { _onSubmitAddCommand } from "../../components/api/RequestApi";
+import axios from "../../api/axios";
 
 export const AddCommand = () => {
   let yourDate = new Date();
   let date = yourDate.toISOString().split("T")[0];
-  const [clientNames, setClientNames] = useState(String);
+  const [clientEmail, setclientEmail] = useState(String);
   const [commandeDateDepot, setCommandeDateDepot] = useState(date);
   const [commandeStatut, setCommandeStatut] = useState("En traitement");
   const [detailsCommandeQuantite, setDetailsCommandeQuantite] = useState(1);
   const [detailsCommandeNote, setDetailsCommandeNote] = useState(String);
-  const [articleService, setArticleService] = useState(1);
+  const [clientName, setClientName] = useState("");
+  const [nbrCommand, setNbrCommand] = useState();
+
+  const [listeArticService, setListeArticService] = useState([]);
+  const [articleservice, setarticleservice] = useState({
+    idArticleService: 0,
+    articleserviceNom: "Null",
+    prix: 1,
+  });
 
   const navigate = useNavigate();
+  const REGISTER_URL_CLIENT = "/client";
+  const REGISTER_URL_ARTSERVICE = "/article-service";
+  const REGISTER_URL_NBRECOMMAND = "/commande";
+  useEffect(() => {
+    axios
+      .get(REGISTER_URL_ARTSERVICE, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${sessionStorage.getItem("accessToken")}`,
+        },
+        withCredentials: true,
+      })
+      .then((res) => setListeArticService(res.data))
+      .catch((e) => console.log(e));
+  }, []);
+  useEffect(() => {
+    axios
+      .get(REGISTER_URL_NBRECOMMAND, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${sessionStorage.getItem("accessToken")}`,
+        },
+        withCredentials: true,
+      })
+      .then((res) =>
+        setNbrCommand(
+          res.data.length > 0 ? res.data[res.data.length - 1].idCommande + 1 : 1
+        )
+      )
+      .then(() => console.log("index des nom ", nbrCommand));
+  }, [clientEmail]);
+
+  const _onSubClient = async (props: any) => {
+    setclientEmail(props);
+
+    try {
+      axios
+        .get(REGISTER_URL_CLIENT, {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${sessionStorage.getItem("accessToken")}`,
+          },
+          withCredentials: true,
+        })
+        .then((res) =>
+          res.data.map((index: any, key: any) =>
+            props == index.userEmail ? setClientName(index.userNames) : null
+          )
+        );
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   const _onSubmit = async () => {
     try {
-      const res = await _onSubmitAdd({
+      const res = await _onSubmitAddCommand({
         // Api COMMANDE
+
         commandeStatut: commandeStatut,
         commandeDateDepot: commandeDateDepot,
-        clientNames: clientNames,
+        clientEmail: clientEmail,
         // Api DETAILS COMMANDE
         detailsCommandeQuantite: detailsCommandeQuantite,
         detailsCommandeNote: detailsCommandeNote,
-        articleService: articleService,
+        articleservice: articleservice.articleserviceNom,
+        //Aide pour le numeroCommande
+        clientName: clientName,
+        nbrCommand: nbrCommand,
       });
       navigate("/Dashboard");
     } catch (Err) {
@@ -37,7 +103,6 @@ export const AddCommand = () => {
 
   return (
     <div className="bg-slate-300">
-      {sessionStorage.getItem("accessToken")}
       <div className="flex max-md:flex-col max-md:items-stretch max-md:gap-0">
         <Nav Lien="Dashboard" />
         <div className="flex flex-col items-stretch w-[82%] max-md:w-full max-md:ml-0">
@@ -61,15 +126,15 @@ export const AddCommand = () => {
                       </span>
                     </div>
                     <span className="text-black text-lg font-medium self-stretch mt-11 max-md:max-w-full max-md:mt-10">
-                      Nom du client
+                      Adresse mail du client
                     </span>
                     <span className="text-zinc-600 text-sm font-light self-stretch max-md:max-w-full">
                       Les nom et l’identifiant du client sont unique
                     </span>
                     <input
-                      value={clientNames}
-                      onChange={(e) => setClientNames(e.target.value)}
-                      placeholder="James"
+                      value={clientEmail}
+                      onChange={(e) => _onSubClient(e.target.value)}
+                      placeholder="chrishine@example.com"
                       className="bg-gray-100 px-5 flex w-[255px] shrink-0 max-w-full h-11 flex-col mt-3.5 rounded-[121px] self-start"
                     />
                     <div className="flex gap-2.5 mt-3 self-start items-start">
@@ -87,10 +152,10 @@ export const AddCommand = () => {
                     <div className="flex items-stretch justify-between gap-5 mt-5 self-start">
                       <div className="text-black text-md font-medium bg-gray-200 grow justify-center items-center px-11 py-2 rounded-full max-md:px-5">
                         com-
-                        {!clientNames.toLowerCase()
+                        {!clientName.toLowerCase()
                           ? "null"
-                          : clientNames.toLowerCase()}
-                        -1
+                          : clientName.toLowerCase()}
+                        {"-" + nbrCommand}
                       </div>
                     </div>
                   </div>
@@ -98,6 +163,29 @@ export const AddCommand = () => {
                 <div className="flex flex-col items-stretch w-[48%] ml-5 max-md:w-full max-md:ml-0">
                   <div className="flex grow flex-col items-stretch max-md:max-w-full max-md:mt-10">
                     <div className="flex flex-col  pl-20 max-md:max-w-full max-md:mt-10 max-md:pl-5">
+                      <span className="text-black text-lg font-medium ml-10 mt-12 self-center max-md:ml-2.5 max-md:mt-10">
+                        Article service
+                      </span>
+                      <div className="text-zinc-600 text-sm font-light ml-4 self-center max-md:ml-2.5">
+                        Type de service désirer par le client
+                      </div>
+                      <div className="text-black text-sm self-center font-light mt-7 max-md:mt-10">
+                        <select
+                          onChange={(e) =>
+                            listeArticService.map((index: any, key: any) =>
+                              index.articleserviceNom == e.target.value
+                                ? setarticleservice(index)
+                                : null
+                            )
+                          }
+                        >
+                          {listeArticService.map((index: any, key: any) => (
+                            <option value={index.articleserviceNom}>
+                              {index.articleserviceNom}
+                            </option>
+                          ))}
+                        </select>
+                      </div>
                       <div className="text-black text-lg font-medium self-center whitespace-nowrap mt-20 max-md:mt-10">
                         Nombre de vêtement
                       </div>
@@ -143,7 +231,7 @@ export const AddCommand = () => {
                       </div>
                       <div className="text-black text-sm self-center font-light mt-7 max-md:mt-10">
                         <span className="font-semibold text-4xl">
-                          {detailsCommandeQuantite * 100}
+                          {detailsCommandeQuantite * articleservice.prix}
                         </span>
                         <span className="text-xl">FCFA</span>
                       </div>
