@@ -53,14 +53,15 @@ export const Dashboard = () => {
             {/* Listes */}
 
             {listCommand.length != 0 ? (
-              listCommand.map((index: any, key: any) => (
+              listCommand.reverse().map((index: any, key: any) => (
                 <ItemsCommd
                   key={index.idCommande}
-                  idCommande={index.idCommande}
-                  numeroCommande={index.numeroCommande}
-                  detailsCommandes={index.detailsCommandes}
-                  commandeStatut={index.commandeStatut}
-                  commandeDateDepot={index.commandeDateDepot}
+                  // idCommande={index.idCommande}
+                  // numeroCommande={index.numeroCommande}
+                  // detailsCommandes={index.detailsCommandes}
+                  // commandeStatut={index.commandeStatut}
+                  // commandeDateDepot={index.commandeDateDepot}
+                  command ={index}
 
                 />
               ))

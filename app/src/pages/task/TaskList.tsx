@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Nav } from "../../components/nav/Nav";
 import { HeaderNav } from "../../components/nav/HeaderNav";
 import { HeaderTxt } from "../../components/nav/HeaderTxt";
@@ -8,16 +8,51 @@ import { TacheEnAttente } from "../../components/items/TacheEnAttente";
 import { Status } from "../../components/status/Status";
 import { AuthContext } from "../../Context/AuthContext";
 import { TacheEnCours } from "../../components/items/TacheEnCours";
+import axios from "../../api/axios";
 
 export const TaskList = () => {
-  const {
-    userEmail,
-    setAuthUser,
-    userPassword,
-    setPwd,
-    setAccessToken,
-    accessToken,
-  } = useContext(AuthContext);
+  const [listeCommand, setListeCommand] = useState([]);
+  const [listAttente, setListAttente] = useState([{}]);
+  const [listEnCours, setListEnCours] = useState([{}]);
+  const REGISTER_URL_COMMANDE = "/commande";
+  const REGISTER_URL_TACHE_LISTE = "/tache-employe";
+  useEffect(() => {
+    axios
+      .get(REGISTER_URL_COMMANDE, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${sessionStorage.getItem("accessToken")}`,
+        },
+        withCredentials: true,
+      })
+      .then((res) => setListeCommand(res.data))
+      .then(() => console.log(listAttente))
+      .catch((e) => console.log(e));
+  }, []);
+  useEffect(() => {
+    axios
+      .get(REGISTER_URL_TACHE_LISTE, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${sessionStorage.getItem("accessToken")}`,
+        },
+        withCredentials: true,
+      })
+      .then((res) => setListEnCours(res.data))
+      .then(() => console.log("lIste En cours", listEnCours))
+      .catch((e) => console.log(e));
+  }, []);
+  
+  useEffect(() => {
+    setListAttente([{}]);
+    listeCommand.map((index: any, key: any) =>
+      index.commandeStatut == "En traitement"
+        ? setListAttente((oldArray) => [...oldArray, index])
+        : null
+    );
+  }, [listeCommand]);
+
+  // console.log("lIste Attente", listAttente);
   return (
     <div className="bg-slate-300">
       <div className=" flex max-md:flex-col max-md:items-stretch max-md:gap-0">
@@ -35,11 +70,11 @@ export const TaskList = () => {
                 <div className="gap-5 flex max-md:flex-col max-md:items-stretch max-md:gap-0">
                   {/* En attente */}
                   <div className="flex flex-col items-stretch w-[51%] max-md:w-full max-md:ml-0">
-                    <TacheEnAttente />
+                    <TacheEnAttente liste={listAttente} />
                   </div>
                   {/* En cours */}
                   <div className="flex flex-col items-stretch w-[49%] ml-5 max-md:w-full max-md:ml-0">
-                    <TacheEnCours />
+                    <TacheEnCours liste={listEnCours} />
                   </div>
                 </div>
               </div>

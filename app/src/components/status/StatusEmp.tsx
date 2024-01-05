@@ -1,8 +1,9 @@
 import React from "react";
 
 export const StatusEmp = (props: any) => {
-  return props.employeStatut == "Disponnible" ? (
-    <div className="bg-emerald-500 bg-opacity-20 flex justify-center p-1 gap-2 rounded-full items-center">
+  return props.employeStatut == "Libre" ||
+    props.employeStatut == "Disponnible" ? (
+    <div className="bg-emerald-500 bg-opacity-20 flex justify-center px-3 py-2  gap-2 rounded-full items-center">
       <img src="/icons/Disponible.svg" alt="" />
       <span className="text-emerald-500 text-xl font-semibold">
         Disponnible

@@ -23,7 +23,7 @@ export const ItemEmpCard = (props: any) => {
               </div>
             </div>
             <div className="text-zinc-600 text-sm font-light mt-2">
-              (+225)0151831681
+              {props.employeEmail}
             </div>
             <div className="text-zinc-600 text-sm font-light mt-2">
               Abidjan,Yopougon

@@ -8,11 +8,21 @@ import { _onSubmitAddEmp } from "../../components/api/RequestApi";
 export const AddEmp = () => {
   let yourDate = new Date();
   let date = yourDate.toISOString().split("T")[0];
-  const [employeNames, setEmployeNames] = useState("");
+  const [userEmail, setUserEmail] = useState("");
+  const [userPassword, setUserPassword] = useState("");
+  const [userNames, setUserNames] = useState("");
   const [employeFonction, setEmployeFonction] = useState("");
   const [employeSalaire, setEmployeSalaire] = useState(Number);
   const [employeDateEmbauche, setEmployeDateEmbauche] = useState(date);
-  const [employeStatut, setEmployeStatut] = useState("Disponible");
+  const [employeStatut, setEmployeStatut] = useState("Libre");
+
+  //   userEmail
+  // userPassword
+  // userNames
+  // employeFonction
+  // employeDateEmbauche
+  // employeSalaire
+  // employeStatut
 
   const navigate = useNavigate();
 
@@ -20,10 +30,12 @@ export const AddEmp = () => {
     try {
       const res = await _onSubmitAddEmp({
         // Api Employes
-        employeNames: employeNames,
+        userEmail: userEmail,
+        userPassword: userPassword,
+        userNames: userNames,
         employeFonction: employeFonction,
-        employeSalaire: employeSalaire,
         employeDateEmbauche: employeDateEmbauche,
+        employeSalaire: employeSalaire,
         employeStatut: employeStatut,
       });
       navigate("/EmpList");
@@ -60,7 +72,7 @@ export const AddEmp = () => {
                             </span>
                           </div>
                           <span className="text-black text-lg font-medium self-stretch mt-11 max-md:mt-10">
-                            Nom complet{" "}
+                            Nom complet
                           </span>
                           <span className="text-zinc-600 text-sm font-light ">
                             Les nom et l’identifiant de l’employe sont unique
@@ -68,8 +80,20 @@ export const AddEmp = () => {
                           <input
                             aria-label="Nom"
                             className="bg-gray-100 flex h-11 mt-2 rounded-full w-fit px-3"
-                            value={employeNames}
-                            onChange={(e) => setEmployeNames(e.target.value)}
+                            value={userNames}
+                            onChange={(e) => setUserNames(e.target.value)}
+                          />
+                          <span className="text-black text-lg font-medium self-stretch mt-7">
+                            Email
+                          </span>
+                          <span className="text-zinc-600 text-sm font-light ">
+                            Boite mail personnel
+                          </span>
+                          <input
+                            aria-label="Email"
+                            className="bg-gray-100 flex h-11 mt-2 rounded-full w-fit px-3"
+                            value={userEmail}
+                            onChange={(e) => setUserEmail(e.target.value)}
                           />
                           <span className="text-black text-lg font-medium self-stretch mt-7">
                             Poste
@@ -83,21 +107,7 @@ export const AddEmp = () => {
                             value={employeFonction}
                             onChange={(e) => setEmployeFonction(e.target.value)}
                           />
-                          <span className="text-black text-lg font-medium self-stretch mt-6">
-                            Numéro de téléphone
-                          </span>
-                          <span className="text-zinc-600 text-sm font-light ">
-                            Entrer uniquement le numéro principale
-                          </span>
-                          <div className="flex items-center gap-3.5 ml-3 mt-3.5 pr-2 self-start max-md:ml-2.5">
-                            <span className="text-black text-lg underline grow whitespace-nowrap my-auto">
-                              + 225
-                            </span>
-                            <input
-                              aria-label="Nom"
-                              className="bg-gray-100 flex h-11 mt-2 rounded-full w-fit px-3"
-                            />
-                          </div>
+
                           <span className="text-black text-lg font-medium self-stretch mt-7">
                             Salaire
                           </span>
@@ -112,16 +122,6 @@ export const AddEmp = () => {
                               setEmployeSalaire(Number(e.target.value))
                             }
                           />
-                          <span className="text-black text-lg font-medium self-stretch mt-6">
-                            Numéro de CNI
-                          </span>
-                          <span className="text-zinc-600 text-sm font-light ">
-                            A enregistrer sous réserve de la pièce physique
-                          </span>
-                          <input
-                            aria-label="Nom"
-                            className="bg-gray-100 flex h-11 mt-2 rounded-full w-fit px-3 "
-                          />
                         </div>
                       </div>
                     </div>
@@ -132,16 +132,16 @@ export const AddEmp = () => {
                     <img src="/Users/7.png" width={150} height={150} alt="" />
                     <div className="self-center flex flex-col items-center gap-3 ">
                       <span className="text-black text-3xl font-semibold mt-7">
-                        Ange Kano
+                        {userNames}
                       </span>
                       <span className="text-black text-lg font-medium ">
-                        Identifiant de l’employé
+                        {userEmail}
                       </span>
                     </div>
-                    <div className="text-zinc-600 text-center text-sm font-light self-center ">
+                    <span className="text-zinc-600 text-center text-sm font-light self-center ">
                       Générer automatiquement à partir des informations de
                       l’employé
-                    </div>
+                    </span>
                     <div className="self-stretch flex items-center justify-center gap-5 mt-5 pr-1.5">
                       <div className="flex  flex-col justify-center items-center">
                         <span className="text-black text-sm font-light bg-gray-200 justify-center items-stretch p-3 rounded-full">
@@ -150,14 +150,16 @@ export const AddEmp = () => {
                       </div>
                       <img src="/icons/Copy.svg" alt="" />
                     </div>
-                    <div className="text-black text-lg font-medium self-stretch mt-14 max-md:mt-10">
+                    <span className="text-black text-lg font-medium self-stretch mt-14 max-md:mt-10">
                       Mot de passe de l’employé
-                    </div>
+                    </span>
                     <div className="self-stretch flex items-stretch justify-between gap-5 mt-6 pr-1.5">
                       <input
                         aria-label="Mot de passe"
-                        value={"Ange Kano"}
-                        type="password"
+                        value={userPassword}
+                        onChange={(e) => setUserPassword(e.target.value)}
+                        type="nom"
+                        placeholder="Au moins 5 charactère"
                         className="bg-gray-200 flexflex-col justify-center items-center px-3 py-2 rounded-[121px] max-md:pr-5"
                       />
                       <img src="/icons/eye.svg" alt="" />

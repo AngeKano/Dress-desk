@@ -7,15 +7,21 @@ import { StatusEmp } from "../../components/status/StatusEmp";
 
 export const DetailEmp = () => {
   const [detailEmploye, setDetaiilEmploye] = useState({
-    idEmploye: 3,
-    employeNames: "",
-    employeFonction: "",
+    idUser: 1,
+    userEmail: "azerty@eg.com",
+    userNames: "Null",
+    statutConnexion: "null",
+    dateInscription: [0, 0, 0],
+    role: "NULL",
+    employeFonction: "Null",
     employeSalaire: 0.0,
-    employeStatut: "Disponible",
-    employeDateEmbauche: [],
+    employeStatut: "Null",
+    tacheEmployes: [],
   });
 
-  const REGISTER_URL_EMPLOYE = "/employe";
+  const REGISTER_URL_EMPLOYE = `/employe/${sessionStorage.getItem(
+    "idEmploye"
+  )}`;
   useEffect(() => {
     axios
       .get(REGISTER_URL_EMPLOYE, {
@@ -25,13 +31,7 @@ export const DetailEmp = () => {
         },
         withCredentials: true,
       })
-      .then((res) => {
-        res.data.map((index: any, key: any) =>
-          index.idEmploye == sessionStorage.getItem("idEmploye")
-            ? setDetaiilEmploye(index)
-            : null
-        );
-      });
+      .then((res) => setDetaiilEmploye(res.data));
   }, []);
   return (
     <div className="bg-slate-300">
@@ -60,7 +60,10 @@ export const DetailEmp = () => {
                       <img src="/Users/6.png" alt="" />
                       <div className="self-center flex grow basis-[0%] flex-col items-stretch my-auto">
                         <span className="text-black text-2xl font-semibold">
-                          {detailEmploye.employeNames}
+                          {detailEmploye.userNames}
+                        </span>
+                        <span className="text-black text-2xl font-semibold">
+                          {detailEmploye.userEmail}
                         </span>
                         <div className="flex self-start items-center justify-center gap-5 mt-3.5">
                           <div className="flex grow flex-col justify-center items-center">
@@ -150,16 +153,20 @@ export const DetailEmp = () => {
                       </div>
                       <div className="flex grow basis-[0%] w-auto flex-col items-stretch self-start">
                         <span className="text-black text-lg">
-                          {detailEmploye.employeDateEmbauche[0] +
+                          {detailEmploye.dateInscription[0] +
                             "-" +
-                            detailEmploye.employeDateEmbauche[1] +
+                            detailEmploye.dateInscription[1] +
                             "-" +
-                            detailEmploye.employeDateEmbauche[2]}
+                            detailEmploye.dateInscription[2]}
                         </span>
                         {/*  */}
                         <div className="mt-8  w-fit">
                           <StatusEmp
-                            employeStatut={detailEmploye.employeStatut}
+                            employeStatut={
+                              detailEmploye.tacheEmployes.length == 0
+                                ? detailEmploye.employeStatut
+                                : "Occupé"
+                            }
                           />
                         </div>
                       </div>
@@ -191,13 +198,13 @@ export const DetailEmp = () => {
                       Nombre de tache achever à la date d’aujourd'hui
                     </span>
                     <span className="text-black text-6xl font-semibold self-center whitespace-nowrap mt-6 max-md:text-4xl">
-                      3
+                      {detailEmploye.tacheEmployes.length}
                     </span>
                     <span className="text-black text-center text-xl self-center max-w-[292px] mt-12 max-md:mt-10">
                       Nombre total de tache depuis son embauche
                     </span>
                     <span className="text-black text-8xl font-semibold self-center whitespace-nowrap mt-10 max-md:text-4xl">
-                      15
+                      {detailEmploye.tacheEmployes.length}
                     </span>
                   </div>
                 </div>

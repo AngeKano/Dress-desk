@@ -28,16 +28,9 @@ export const DetailCommand = (props: any) => {
       statutConnexion: "Null",
       dateInscription: [2024, 1, 3],
       role: "NULL",
-      clientAdresse: "Daloa",
-      clientTelephone: "+2250768790582",
+      clientAdresse: "Null",
+      clientTelephone: "+2250000000000",
       commandes: [],
-      enabled: true,
-      password: "$2a$10$BPhh6yIBHCaee54uLLrxmuSuvTntoS0a30rIwIOTsP1EmElIjpbJK",
-      username: "chrishine@example.com",
-      accountNonLocked: true,
-      authorities: [],
-      accountNonExpired: true,
-      credentialsNonExpired: true,
     },
   });
   const REGISTER_URL = `/commande/${sessionStorage.getItem("idCommande")}`;
@@ -79,16 +72,16 @@ export const DetailCommand = (props: any) => {
                       <img src="/users/2.png" alt="" />
                       <div className="flex grow flex-col items-stretch self-start">
                         <div className="text-black text-2xl font-semibold">
-                          Ange Kano
+                          {detailCommand.client.userNames}
                         </div>
                         <div className="text-black text-lg font-light">
-                          AngeKano002@gmail.com
+                          {detailCommand.client.userEmail}
                         </div>
                         <div className="text-black text-lg font-light">
-                          +225 0151831681
+                          {detailCommand.client.clientTelephone}
                         </div>
                         <div className="text-black text-lg font-light">
-                          Abidjan, Yopougon
+                          {detailCommand.client.clientAdresse}
                         </div>
                       </div>
                     </div>
@@ -139,7 +132,9 @@ export const DetailCommand = (props: any) => {
               </div>
               <div className="flex flex-col mt-1">
                 <div className="text-zinc-600 text-2xl font-semibold whitespace-nowrap self-end">
-                  <span className="text-4xl">{detailCommand.prixTotal}</span>
+                  <span className="text-4xl">
+                    {detailCommand.detailsCommandes[0].prixTotal}
+                  </span>
                   <span className="font-medium text-zinc-600">FCFA</span>
                 </div>
                 <span className="text-black text-xl font-medium self-end mt-7 max-md:mt-10">
@@ -147,10 +142,14 @@ export const DetailCommand = (props: any) => {
                 </span>
                 <div className="self-stretch flex flex-col mt-7 pl-20 items-end max-md:pl-5">
                   <span className="text-black text-lg font-semibold ">
-                    {detailCommand.detailsCommandeQuantite}
+                    {detailCommand.detailsCommandes[0].detailsCommandeQuantite}
                   </span>
                   <span className="text-black text-lg font-semibold self-end mt-7 max-md:ml-0.5">
-                    {/*qsd*/}
+                    {detailCommand.commandeDateDepot[0] +
+                      "-" +
+                      detailCommand.commandeDateDepot[1] +
+                      "-" +
+                      detailCommand.commandeDateDepot[2]}
                   </span>
                 </div>
                 <div className=" self-end flex items-stretch justify-between gap-2.5 mt-7   rounded-[100px] max-md:px-5">

@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 
-export const ItemAttente = () => {
+export const ItemAttente = (props: any) => {
   return (
     <div className="justify-center bg-white mt-7 px-5 py-6 rounded-3xl max-md:max-w-full max-md:pl-5">
       <div className="gap-5 flex max-md:flex-col max-md:items-stretch max-md:gap-0">
@@ -14,7 +14,9 @@ export const ItemAttente = () => {
             </span>
             <span className="text-black text-lg mt-10">Montant</span>
             <div className="flex items-stretch justify-between gap-4 mt-8">
-              <span className="text-zinc-600 text-base my-auto">Ange Kano</span>
+              <span className="text-zinc-600 text-base my-auto">
+                {/* {command.client.userNames} */}
+              </span>
             </div>
           </div>
         </div>
@@ -29,13 +31,25 @@ export const ItemAttente = () => {
                 alt=""
               />
               <div className="text-black text-xl font-semibold mt-24 self-end max-md:mt-10">
-                <span className="text-lg">X5</span>
+                <span className="text-lg">
+                  X{props.command.detailsCommandes[0].detailsCommandeQuantite}
+                </span>
               </div>
               <span className="text-zinc-600 text-xl font-semibold whitespace-nowrap mt-9">
-                500 <span className="text-sm text-zinc-600">FCFA</span>
+                {props.command.detailsCommandes[0].prixTotal}{" "}
+                <span className="text-sm text-zinc-600">FCFA</span>
               </span>
             </div>
-            <a href="/TaskAttrib" className="justify-between bg-black flex gap-2.5 mt-8 px-4 py-2 rounded-full items-center">
+            <a
+              href="/TaskAttrib"
+              onClick={() =>
+                sessionStorage.setItem(
+                  "idCommandTache",
+                  props.command.idCommande
+                )
+              }
+              className="justify-between bg-black flex gap-2.5 mt-8 px-4 py-2 rounded-full items-center"
+            >
               <img src="/icons/UsersWit.svg" alt="" />
               <span className="text-white text-lg font-semibold self-stretch grow whitespace-nowrap">
                 Attribuer

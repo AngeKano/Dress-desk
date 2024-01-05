@@ -58,11 +58,16 @@ export const EmpList = () => {
                   {listEmploye.length != 0 ? (
                     listEmploye.map((index: any, key: any) => (
                       <ItemEmpCard
-                        idEmploye={index.idEmploye}
-                        employeNames={index.employeNames}
+                        idEmploye={index.idUser}
+                        employeNames={index.userNames}
+                        employeEmail={index.userEmail}
                         employeFonction={index.employeFonction}
                         employeSalaire={index.employeSalaire}
-                        employeStatut={index.employeStatut}
+                        employeStatut={
+                          index.tacheEmployes.length == 0
+                            ? index.employeStatut
+                            : "Occupé"
+                        }
                       />
                     ))
                   ) : (
