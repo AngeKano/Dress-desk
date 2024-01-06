@@ -1,12 +1,19 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Nav } from "../components/nav/Nav";
 import { HeaderNav } from "../components/nav/HeaderNav";
 import { HeaderTxt } from "../components/nav/HeaderTxt";
 import { HeaderStat } from "../components/nav/HeaderStat";
 import { ItemsCommd } from "../components/nav/items/ItemsCommd";
 import axios from "../api/axios";
+import { AuthContext } from "../Context/AuthContext";
 
 export const Dashboard = () => {
+  const {
+    nbrCommndeTerminé,
+    setNbrCommndeTerminé,
+    nbrCommndeCours,
+    setNbrCommndeCours,
+  } = useContext(AuthContext);
   const [listCommand, setListeCommand] = useState([]);
   const REGISTER_URL = "/commande";
   useEffect(() => {
@@ -21,6 +28,20 @@ export const Dashboard = () => {
       .then((res) => setListeCommand(res.data))
       .catch((e) => console.log(e));
   }, []);
+
+  useEffect(() => {
+    setNbrCommndeTerminé(0),
+      setNbrCommndeCours(0),
+      listCommand.map((index: any) =>
+        index.commandeStatut == "En traitement"
+          ? setNbrCommndeCours((nbrCommndeCours: number) => nbrCommndeCours + 1)
+          : setNbrCommndeTerminé(
+              (nbrCommndeTerminé: number) => nbrCommndeTerminé + 1
+            )
+      );
+    console.log(nbrCommndeTerminé);
+  }, [listCommand]);
+
   return (
     <div className="bg-slate-300">
       <div className=" flex max-md:flex-col max-md:items-stretch max-md:gap-0">
@@ -61,8 +82,7 @@ export const Dashboard = () => {
                   // detailsCommandes={index.detailsCommandes}
                   // commandeStatut={index.commandeStatut}
                   // commandeDateDepot={index.commandeDateDepot}
-                  command ={index}
-
+                  command={index}
                 />
               ))
             ) : (

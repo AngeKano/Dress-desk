@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import axios from "../api/axios";
 import { useNavigate } from "react-router-dom";
 
-export const Login: React.FC = () => {
+export const Login: React.FC = (props:any) => {
   const electron = (window as any).electron;
 
   const [userEmail, setUserEmail] = useState(String);

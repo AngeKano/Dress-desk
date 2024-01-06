@@ -15,6 +15,7 @@ import { DetailEmp } from "./pages/employes/DetailEmp";
 import { EmpList } from "./pages/employes/EmpList";
 import { TaskList } from "./pages/task/TaskList";
 import { TaskAttrib } from "./pages/task/TaskAttrib";
+import { RequestApi } from "./components/api/RequestApi";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -38,6 +39,8 @@ root.render(
             {/* Task */}
             <Route path="/TaskList" element={<TaskList />} />
             <Route path="/TaskAttrib" element={<TaskAttrib />} />
+            {/*Api*/}
+            <Route path="/Api" element={<RequestApi />} />
           </Routes>
         </BrowserRouter>
       </div>

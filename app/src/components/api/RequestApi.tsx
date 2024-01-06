@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "../../api/axios";
+import { Navigate, useNavigate } from "react-router-dom";
 
 export const RequestApi = () => {
   return <div>RequestApi</div>;
@@ -210,7 +211,7 @@ export const _onAttribution = async (props: any) => {
 export const _onSubTerminer = async (props: any) => {
   let REGISTER_URL_TACHE_TERMINER = `/tache-employe/${props.idTacheEmploye}`;
   let REGISTER_URL_STATUS_COMMAND = `/commande/${props.idCommande}`;
-  const commandeStatut = "validé";
+  const commandeStatut = "Terminé";
   const commandeDateDepot = props.commandeDateDepot;
   const clientEmail = props.userEmail;
   console.log(props);
@@ -240,10 +241,14 @@ export const _onSubTerminer = async (props: any) => {
       withCredentials: true,
     });
     console.log("Add command Attribution ✅: ", resAttrib.data);
-
+    // navigate("/TaskList");
     return resAttrib.status;
   } catch (err) {
     console.log("Impossible d'enregistrer une commande 🔴");
     console.log(err);
   }
 };
+
+export default function () {
+  return <p>Dadd</p>;
+}
