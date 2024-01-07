@@ -2,8 +2,7 @@ import React, { useState } from "react";
 import axios from "../api/axios";
 import { useNavigate } from "react-router-dom";
 
-export const Login: React.FC = (props:any) => {
-  const electron = (window as any).electron;
+export const Login: React.FC = () => {
 
   const [userEmail, setUserEmail] = useState(String);
   const [userPassword, setUserPassword] = useState(String);
@@ -132,11 +131,5 @@ export const Login: React.FC = (props:any) => {
       </div>
     </div>
 
-    // <div className="bg-red-600">
-    //   Page de work <br />
-    //   th homdir @ {electron.homeDir()} <br />
-    //   The Os is arch {electron.arch()} <br />
-    //   The Os is arch {electron.osVersion()} <br />
-    // </div>
   );
 };

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Nav } from "../components/nav/Nav";
 import { HeaderNav } from "../components/nav/HeaderNav";
 import { HeaderTxt } from "../components/nav/HeaderTxt";
@@ -11,7 +11,6 @@ export const Dashboard = () => {
   const {
     nbrCommndeTerminé,
     setNbrCommndeTerminé,
-    nbrCommndeCours,
     setNbrCommndeCours,
   } = useContext(AuthContext);
   const [listCommand, setListeCommand] = useState([]);
@@ -74,14 +73,9 @@ export const Dashboard = () => {
             {/* Listes */}
 
             {listCommand.length != 0 ? (
-              listCommand.reverse().map((index: any, key: any) => (
+              listCommand.reverse().map((index: any) => (
                 <ItemsCommd
                   key={index.idCommande}
-                  // idCommande={index.idCommande}
-                  // numeroCommande={index.numeroCommande}
-                  // detailsCommandes={index.detailsCommandes}
-                  // commandeStatut={index.commandeStatut}
-                  // commandeDateDepot={index.commandeDateDepot}
                   command={index}
                 />
               ))
