@@ -1,4 +1,3 @@
-import React from "react";
 
 export const HeaderTxt = (props: any) => {
   let yourDate = new Date();

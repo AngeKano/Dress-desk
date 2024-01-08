@@ -1,4 +1,3 @@
-import React from "react";
 
 export const ButtonNav = (props: any) => {
   return props.active==true ? (

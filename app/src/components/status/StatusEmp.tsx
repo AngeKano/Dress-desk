@@ -1,4 +1,3 @@
-import React from "react";
 
 export const StatusEmp = (props: any) => {
   return props.employeStatut == "Libre" ||

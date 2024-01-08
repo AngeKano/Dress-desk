@@ -1,6 +1,5 @@
-import React, { useContext } from "react";
+
 import { ButtonNav } from "./ButtonNav";
-import { AuthContext, useAuth } from "../../Context/AuthContext";
 
 export const Nav = (props: any) => {
   

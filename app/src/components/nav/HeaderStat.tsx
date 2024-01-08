@@ -5,9 +5,7 @@ import { AuthContext } from "../../Context/AuthContext";
 export const HeaderStat = (props: any) => {
   const {
     nbrCommndeTerminé,
-    setNbrCommndeTerminé,
     nbrCommndeCours,
-    setNbrCommndeCours,
     nbrDispo,
   } = useContext(AuthContext);
   return (

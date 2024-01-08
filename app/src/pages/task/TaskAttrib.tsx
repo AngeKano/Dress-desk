@@ -1,9 +1,7 @@
-import React, { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Nav } from "../../components/nav/Nav";
 import { HeaderNav } from "../../components/nav/HeaderNav";
 import { HeaderTxt } from "../../components/nav/HeaderTxt";
-import { ItemsCommd } from "../../components/nav/items/ItemsCommd";
-import { Status } from "../../components/status/Status";
 import { ItemsEmp } from "../../components/nav/items/ItemsEmp";
 import axios from "../../api/axios";
 import { ItemCmdTache } from "../../components/nav/items/ItemCmdTache";

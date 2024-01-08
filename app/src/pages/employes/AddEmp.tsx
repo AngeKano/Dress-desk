@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import  { useState } from "react";
 import { Nav } from "../../components/nav/Nav";
 import { HeaderNav } from "../../components/nav/HeaderNav";
 import { HeaderTxt } from "../../components/nav/HeaderTxt";
@@ -16,13 +16,6 @@ export const AddEmp = () => {
   const [employeDateEmbauche, setEmployeDateEmbauche] = useState(date);
   const [employeStatut, setEmployeStatut] = useState("Libre");
 
-  //   userEmail
-  // userPassword
-  // userNames
-  // employeFonction
-  // employeDateEmbauche
-  // employeSalaire
-  // employeStatut
 
   const navigate = useNavigate();
 
