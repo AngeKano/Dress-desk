@@ -1,4 +1,4 @@
-import React from "react";
+
 import { Status } from "../status/Status";
 import { _onSubTerminer } from "../api/RequestApi";
 
