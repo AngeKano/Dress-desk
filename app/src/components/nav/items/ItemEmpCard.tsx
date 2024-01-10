@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import { StatusEmp } from "../../status/StatusEmp";
 
 export const ItemEmpCard = (props: any) => {

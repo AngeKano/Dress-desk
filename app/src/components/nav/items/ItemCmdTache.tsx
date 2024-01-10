@@ -1,4 +1,3 @@
-import  { useState } from "react";
 import { Status } from "../../status/Status";
 
 export const ItemCmdTache = (props: any) => {

@@ -1,13 +1,14 @@
-import React from "react";
 import { Status } from "../../status/Status";
 
 export const ItemsCommd = (props: any) => {
-  console.log(props.command)
+  console.log(props.command);
   return (
     <a
       key={props.key}
       href="/DetailCommand"
-      onClick={() => sessionStorage.setItem("idCommande", props.command.idCommande)}
+      onClick={() =>
+        sessionStorage.setItem("idCommande", props.command.idCommande)
+      }
       className="justify-between items-center self-stretch flex gap-2 mt-8 pr-2 max-md:max-w-full"
     >
       <div className="rounded-lg bg-zinc-200 w-10 h-10 flex items-center justify-center">

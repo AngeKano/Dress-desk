@@ -10,7 +10,7 @@ import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Context/AuthContext";
 
 export const TaskAttrib = () => {
-  const { employe, setEmploye } = useContext(AuthContext);
+  const { employe } = useContext(AuthContext);
 
   const [command, setCommand] = useState({
     idCommande: 28,

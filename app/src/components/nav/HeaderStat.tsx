@@ -2,12 +2,9 @@ import { useContext } from "react";
 import { Stats } from "./items/Stats";
 import { AuthContext } from "../../Context/AuthContext";
 
-export const HeaderStat = (props: any) => {
-  const {
-    nbrCommndeTerminé,
-    nbrCommndeCours,
-    nbrDispo,
-  } = useContext(AuthContext);
+export const HeaderStat = () => {
+  const { nbrCommndeTerminé, nbrCommndeCours, nbrDispo } =
+    useContext(AuthContext);
   return (
     <>
       <div className="bg-stone-300 self-stretch w-full shrink-0 h-px mt-7 max-md:mr-1.5" />

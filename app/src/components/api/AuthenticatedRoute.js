@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import{ useContext } from "react";
 import Auth from "../../Context/Auth";
 
 const AuthenticatedRoute = ({ path, component }) => {

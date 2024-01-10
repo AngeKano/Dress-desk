@@ -47,7 +47,6 @@ export function AuthProvider(props) {
           ? setNbrCommndeCours((nbrCommndeCours) => nbrCommndeCours + 1)
           : setNbrCommndeTerminé((nbrCommndeTerminé) => nbrCommndeTerminé + 1)
       );
-    console.log(nbrCommndeTerminé);
   }, [listCommand]);
 
   useEffect(() => {
@@ -64,13 +63,12 @@ export function AuthProvider(props) {
   }, []);
 
   useEffect(() => {
-    setNbrDispo(0), console.log(listEmpl);
+    setNbrDispo(0);
     listEmpl.map((index) =>
       index.tacheEmployes.length == 0
         ? setNbrDispo((nbrDispo) => nbrDispo + 1)
         : null
     );
-    console.log(nbrDispo);
   }, [listEmpl]);
 
   const value = {

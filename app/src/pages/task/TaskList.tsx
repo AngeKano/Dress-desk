@@ -23,7 +23,6 @@ export const TaskList = () => {
         withCredentials: true,
       })
       .then((res) => setListeCommand(res.data))
-      .then(() => console.log(listAttente))
       .catch((e) => console.log(e));
   }, []);
   useEffect(() => {
@@ -36,7 +35,6 @@ export const TaskList = () => {
         withCredentials: true,
       })
       .then((res) => setListEnCours(res.data))
-      .then(() => console.log("lIste En cours", listEnCours))
       .catch((e) => console.log(e));
   }, []);
   
@@ -49,7 +47,6 @@ export const TaskList = () => {
     );
   }, [listeCommand]);
 
-  // console.log("lIste Attente", listAttente);
   return (
     <div className="bg-slate-300">
       <div className=" flex max-md:flex-col max-md:items-stretch max-md:gap-0">
