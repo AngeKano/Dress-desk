@@ -5,7 +5,7 @@ import { HeaderTxt } from "../../components/nav/HeaderTxt";
 import { Status } from "../../components/status/Status";
 import axios from "../../api/axios";
 
-export const DetailCommand = (props: any) => {
+export const DetailCommand = () => {
   const [detailCommand, setDetailCommand] = useState({
     idCommande: 0,
     commandeStatut: "En traitement",

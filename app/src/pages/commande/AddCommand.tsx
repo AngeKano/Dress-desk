@@ -53,8 +53,7 @@ export const AddCommand = () => {
         setNbrCommand(
           res.data.length > 0 ? res.data[res.data.length - 1].idCommande + 1 : 1
         )
-      )
-      .then(() => console.log("index des nom ", nbrCommand));
+      );
   }, [clientEmail]);
 
   const _onSubClient = async (props: any) => {

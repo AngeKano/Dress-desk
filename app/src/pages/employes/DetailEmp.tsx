@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Nav } from "../../components/nav/Nav";
 import { HeaderNav } from "../../components/nav/HeaderNav";
 import { HeaderTxt } from "../../components/nav/HeaderTxt";
@@ -159,7 +159,6 @@ export const DetailEmp = () => {
                             "-" +
                             detailEmploye.dateInscription[2]}
                         </span>
-                        {/*  */}
                         <div className="mt-8  w-fit">
                           <StatusEmp
                             employeStatut={

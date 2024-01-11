@@ -8,11 +8,7 @@ import axios from "../api/axios";
 import { AuthContext } from "../Context/AuthContext";
 
 export const Dashboard = () => {
-  const {
-    nbrCommndeTerminé,
-    setNbrCommndeTerminé,
-    setNbrCommndeCours,
-  } = useContext(AuthContext);
+  const { setNbrCommndeTerminé, setNbrCommndeCours } = useContext(AuthContext);
   const [listCommand, setListeCommand] = useState([]);
   const REGISTER_URL = "/commande";
   useEffect(() => {
@@ -38,7 +34,6 @@ export const Dashboard = () => {
               (nbrCommndeTerminé: number) => nbrCommndeTerminé + 1
             )
       );
-    console.log(nbrCommndeTerminé);
   }, [listCommand]);
 
   return (
@@ -73,12 +68,11 @@ export const Dashboard = () => {
             {/* Listes */}
 
             {listCommand.length != 0 ? (
-              listCommand.reverse().map((index: any) => (
-                <ItemsCommd
-                  key={index.idCommande}
-                  command={index}
-                />
-              ))
+              listCommand
+                .reverse()
+                .map((index: any) => (
+                  <ItemsCommd key={index.idCommande} command={index} />
+                ))
             ) : (
               <span className="self-center font-light mt-10 text-zinc-500 ">
                 Aucune commande
