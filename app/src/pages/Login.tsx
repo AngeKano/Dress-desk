@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import axios from "../api/axios";
 import { useNavigate } from "react-router-dom";
 
-export const Login: React.FC = () => {
+export const Login = () => {
 
   const [userEmail, setUserEmail] = useState(String);
   const [userPassword, setUserPassword] = useState(String);
