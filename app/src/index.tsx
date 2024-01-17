@@ -14,7 +14,7 @@ import { DetailEmp } from "./pages/employes/DetailEmp";
 import { EmpList } from "./pages/employes/EmpList";
 import { TaskList } from "./pages/task/TaskList";
 import { TaskAttrib } from "./pages/task/TaskAttrib";
-import { RequestApi } from "./components/api/RequestApi";
+import { RequestApi } from "./api/RequestApi";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement

@@ -5,7 +5,7 @@ import { HeaderTxt } from "../../components/nav/HeaderTxt";
 import { ItemsEmp } from "../../components/nav/items/ItemsEmp";
 import axios from "../../api/axios";
 import { ItemCmdTache } from "../../components/nav/items/ItemCmdTache";
-import { _onAttribution } from "../../components/api/RequestApi";
+import { _onAttribution } from "../../api/RequestApi";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Context/AuthContext";
 

@@ -1,6 +1,5 @@
-
 import { Status } from "../status/Status";
-import { _onSubTerminer } from "../api/RequestApi";
+import { _onSubTerminer } from "../../api/RequestApi";
 
 export const ItemCours = (props: any) => {
   let userEmail = props.command.employe.tacheEmployes.map((index: any) =>

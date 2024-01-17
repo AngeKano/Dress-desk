@@ -1,9 +1,9 @@
-import  { useState } from "react";
+import { useState } from "react";
 import { Nav } from "../../components/nav/Nav";
 import { HeaderNav } from "../../components/nav/HeaderNav";
 import { HeaderTxt } from "../../components/nav/HeaderTxt";
 import { useNavigate } from "react-router-dom";
-import { _onSubmitAddEmp } from "../../components/api/RequestApi";
+import { _onSubmitAddEmp } from "../../api/RequestApi";
 
 export const AddEmp = () => {
   let yourDate = new Date();
@@ -15,7 +15,6 @@ export const AddEmp = () => {
   const [employeSalaire, setEmployeSalaire] = useState(Number);
   const [employeDateEmbauche, setEmployeDateEmbauche] = useState(date);
   const [employeStatut, setEmployeStatut] = useState("Libre");
-
 
   const navigate = useNavigate();
 

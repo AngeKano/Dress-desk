@@ -1,31 +1,27 @@
 import { useState } from "react";
-import axios from "../api/axios";
 import { useNavigate } from "react-router-dom";
+import { AdminLogin } from "../api/AdminLogin";
 
 export const Login = () => {
-  const [userEmail, setUserEmail] = useState(String);
+  const [userNumber, setUserNumber] = useState(String);
   const [userPassword, setUserPassword] = useState(String);
-  const REGISTER_URL = "/auth/login";
   const [error, setError] = useState(false);
 
   const navigate = useNavigate();
 
   const _onSubmit = async () => {
     try {
-      const res = await axios.post(
-        REGISTER_URL,
-        JSON.stringify({ userEmail, userPassword }),
-        {
-          headers: { "Content-Type": "application/json" },
-          withCredentials: true,
-        }
+      const res = await AdminLogin({
+        userNumber: userNumber,
+        userPassword: userPassword,
+      }).then(
+        () => console.log("")
+        //  res == 202
+        // ? navigate("/Dashboard")
+        // : (setUserNumber(""), setUserPassword(""), setError(true))
       );
-      sessionStorage.setItem("userEmail", userEmail);
-      sessionStorage.setItem("userPassword", userPassword);
-      sessionStorage.setItem("accessToken", res.data.token);
-      navigate("/Dashboard");
     } catch (err) {
-      setUserEmail("");
+      setUserNumber("");
       setUserPassword("");
       setError(true);
       console.log("Impossible de se connecter 🔴");
@@ -63,7 +59,7 @@ export const Login = () => {
               </span>
             </div>
             <div className="text-black text-2xl font-medium self-stretch mt-8 max-md:max-w-full max-md:mt-10 font-['Poppins'] ">
-              Identifiant
+              Numéro Téléphone
             </div>
             <div className="text-zinc-600 text-sm font-light self-stretch mt-1 max-md:max-w-full">
               votre identifiant est unique
@@ -79,9 +75,9 @@ export const Login = () => {
                   : "border-2 border-solid") +
                 " self-stretch justify-center mt-3 px-7 py-3 rounded-[100px] items-start max-md:max-w-full max-md:px-5"
               }
-              placeholder="EX: KANG@2023147"
-              onChange={(e) => setUserEmail(e.target.value)}
-              value={userEmail}
+              placeholder="EX: +2251234567890"
+              onChange={(e) => setUserNumber(e.target.value)}
+              value={userNumber}
             />
             <div className="text-black text-2xl font-medium self-stretch mt-10 max-md:max-w-full font-['Poppins'] ">
               Mot de passse

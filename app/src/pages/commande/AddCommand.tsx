@@ -3,7 +3,7 @@ import { Nav } from "../../components/nav/Nav";
 import { HeaderNav } from "../../components/nav/HeaderNav";
 import { HeaderTxt } from "../../components/nav/HeaderTxt";
 import { useNavigate } from "react-router-dom";
-import { _onSubmitAddCommand } from "../../components/api/RequestApi";
+import { _onSubmitAddCommand } from "../../api/RequestApi";
 import axios from "../../api/axios";
 
 export const AddCommand = () => {

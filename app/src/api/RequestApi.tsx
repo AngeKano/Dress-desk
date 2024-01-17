@@ -1,5 +1,4 @@
-
-import axios from "../../api/axios";
+import axios from "./axios";
 
 export const RequestApi = () => {
   return <div>RequestApi</div>;

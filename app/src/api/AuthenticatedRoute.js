@@ -1,5 +1,5 @@
 import{ useContext } from "react";
-import Auth from "../../Context/Auth";
+import Auth from "../Context/Auth";
 
 const AuthenticatedRoute = ({ path, component }) => {
   const { isAuthenticated } = useContext(Auth);
