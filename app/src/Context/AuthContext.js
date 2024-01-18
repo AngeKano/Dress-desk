@@ -8,8 +8,13 @@ export function useAuth() {
 }
 
 export function AuthProvider(props) {
-  const [userEmail, setAuthUser] = useState(null);
-  const [userPassword, setPwd] = useState(null);
+  //Login Page State utilies
+
+  const [userNumber, setUserNumber] = useState(String);
+  const [userPassword, setUserPassword] = useState(String);
+  const [error, setError] = useState(false);
+
+  // const [userPassword, setPwd] = useState(null);
   const [accessToken, setAccessToken] = useState(null);
   const [isLoggedIn, setIsLoggedInz] = useState(null);
 
@@ -72,12 +77,18 @@ export function AuthProvider(props) {
   }, [listEmpl]);
 
   const value = {
-    userEmail,
-    setAuthUser,
+    //Login Page State utilies
+    userNumber,
+    setUserNumber,
+    userPassword,
+    setUserPassword,
+    error,
+    setError,
+    /**/
     isLoggedIn,
     setIsLoggedInz,
     userPassword,
-    setPwd,
+    // setPwd,
     accessToken,
     setAccessToken,
     select,
