@@ -19,7 +19,6 @@ export const _onSubmitAddCommand = async (props: any) => {
   const clientName = props.clientName;
   const nbrCommand = props.nbrCommand;
 
-  // let numeroCommande = "com-" + clientName + "-" + nbrCommand;
   //Variable use to add details of command
   const detailsCommandeQuantite = props.detailsCommandeQuantite;
   const detailsCommandeNote = props.detailsCommandeNote;

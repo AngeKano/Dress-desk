@@ -1,5 +1,6 @@
 import React, { useState, useContext, useEffect } from "react";
 import axios from "../api/axios";
+import { GetCommand } from "../api/commande/GetCommand";
 
 export const AuthContext = React.createContext();
 
@@ -9,7 +10,6 @@ export function useAuth() {
 
 export function AuthProvider(props) {
   //Login Page State utilies
-
   const [userNumber, setUserNumber] = useState(String);
   const [userPassword, setUserPassword] = useState(String);
   const [error, setError] = useState(false);
@@ -31,18 +31,16 @@ export function AuthProvider(props) {
   const REGISTER_URL = "/commande";
   const REGISTER_URL_EMPLOYE = "/employe";
 
-  useEffect(() => {
-    axios
-      .get(REGISTER_URL, {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${sessionStorage.getItem("accessToken")}`,
-        },
-        withCredentials: true,
-      })
-      .then((res) => setListeCommand(res.data))
-      .catch((e) => console.log(e));
-  }, []);
+  useEffect(
+    () =>
+      GetCommand({
+        setListeCommand: setListeCommand,
+        setNbrCommndeTerminé: setNbrCommndeTerminé,
+        setNbrCommndeCours: setNbrCommndeCours,
+        listCommand: listCommand,
+      }),
+    []
+  );
 
   useEffect(() => {
     setNbrCommndeTerminé(0),
@@ -54,27 +52,27 @@ export function AuthProvider(props) {
       );
   }, [listCommand]);
 
-  useEffect(() => {
-    axios
-      .get(REGISTER_URL_EMPLOYE, {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${sessionStorage.getItem("accessToken")}`,
-        },
-        withCredentials: true,
-      })
-      .then((res) => setListEmpl(res.data))
-      .catch((e) => console.log(e));
-  }, []);
+  // useEffect(() => {
+  //   axios
+  //     .get(REGISTER_URL_EMPLOYE, {
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //         Authorization: `Bearer ${sessionStorage.getItem("accessToken")}`,
+  //       },
+  //       withCredentials: true,
+  //     })
+  //     .then((res) => setListEmpl(res.data))
+  //     .catch((e) => console.log(e));
+  // }, []);
 
-  useEffect(() => {
-    setNbrDispo(0);
-    listEmpl.map((index) =>
-      index.tacheEmployes.length == 0
-        ? setNbrDispo((nbrDispo) => nbrDispo + 1)
-        : null
-    );
-  }, [listEmpl]);
+  // useEffect(() => {
+  //   setNbrDispo(0);
+  //   listEmpl.map((index) =>
+  //     index.tacheEmployes.length == 0
+  //       ? setNbrDispo((nbrDispo) => nbrDispo + 1)
+  //       : null
+  //   );
+  // }, [listEmpl]);
 
   const value = {
     //Login Page State utilies
