@@ -25,6 +25,9 @@ export function AuthProvider(props) {
   const [nbrCommndeCours, setNbrCommndeCours] = useState(0);
   const [listCommand, setListeCommand] = useState([]);
 
+  const [idCommandSpc, setIdCommandSpc] = useState({});
+  const [commandSpc, setCommandSpc] = useState({});
+
   const [listEmpl, setListEmpl] = useState([]);
   const [nbrDispo, setNbrDispo] = useState(0);
 
@@ -43,13 +46,13 @@ export function AuthProvider(props) {
   );
 
   useEffect(() => {
-    setNbrCommndeTerminé(0),
-      setNbrCommndeCours(0),
-      listCommand.map((index) =>
-        index.commandeStatut == "En traitement"
-          ? setNbrCommndeCours((nbrCommndeCours) => nbrCommndeCours + 1)
-          : setNbrCommndeTerminé((nbrCommndeTerminé) => nbrCommndeTerminé + 1)
-      );
+    setNbrCommndeTerminé(0);
+    setNbrCommndeCours(0);
+    listCommand.map((index) =>
+      index.commandeStatut == "En cours d'attribution"
+        ? setNbrCommndeCours((nbrCommndeCours) => nbrCommndeCours + 1)
+        : setNbrCommndeTerminé((nbrCommndeTerminé) => nbrCommndeTerminé + 1)
+    );
   }, [listCommand]);
 
   // useEffect(() => {
@@ -76,12 +79,20 @@ export function AuthProvider(props) {
 
   const value = {
     //Login Page State utilies
+
     userNumber,
     setUserNumber,
     userPassword,
     setUserPassword,
     error,
     setError,
+
+    /**/
+    //Liste commande
+
+    listCommand,
+    commandSpc,
+    setCommandSpc,
     /**/
     isLoggedIn,
     setIsLoggedInz,

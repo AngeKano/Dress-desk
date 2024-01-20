@@ -1,40 +1,13 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext } from "react";
 import { Nav } from "../components/nav/Nav";
 import { HeaderNav } from "../components/nav/HeaderNav";
 import { HeaderTxt } from "../components/nav/HeaderTxt";
 import { HeaderStat } from "../components/nav/HeaderStat";
 import { ItemsCommd } from "../components/nav/items/ItemsCommd";
-import axios from "../api/axios";
 import { AuthContext } from "../Context/AuthContext";
 
 export const Dashboard = () => {
-  const { setNbrCommndeTerminé, setNbrCommndeCours } = useContext(AuthContext);
-  const [listCommand, setListeCommand] = useState([]);
-  const REGISTER_URL = "/commande";
-  useEffect(() => {
-    axios
-      .get(REGISTER_URL, {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${sessionStorage.getItem("accessToken")}`,
-        },
-        withCredentials: true,
-      })
-      .then((res) => setListeCommand(res.data))
-      .catch((e) => console.log(e));
-  }, []);
-
-  useEffect(() => {
-    setNbrCommndeTerminé(0),
-      setNbrCommndeCours(0),
-      listCommand.map((index: any) =>
-        index.commandeStatut == "En traitement"
-          ? setNbrCommndeCours((nbrCommndeCours: number) => nbrCommndeCours + 1)
-          : setNbrCommndeTerminé(
-              (nbrCommndeTerminé: number) => nbrCommndeTerminé + 1
-            )
-      );
-  }, [listCommand]);
+  const { listCommand, setIdCommandSpc } = useContext(AuthContext);
 
   return (
     <div className="bg-slate-300">
@@ -71,7 +44,11 @@ export const Dashboard = () => {
               listCommand
                 .reverse()
                 .map((index: any) => (
-                  <ItemsCommd key={index.idCommande} command={index} />
+                  <ItemsCommd
+                    key={index.idCommande}
+                    command={index}
+                    setIdCommandSpc={setIdCommandSpc}
+                  />
                 ))
             ) : (
               <span className="self-center font-light mt-10 text-zinc-500 ">
