@@ -19,5 +19,4 @@ export const PostCommand = async (props: any) => {
   } catch (err) {
     return err;
   }
-  return <div>PostCommand</div>;
 };

@@ -70,16 +70,6 @@ export const Login = () => {
             <div className="rounded-full mt-3 flex flex-row gap-x-3 w-fit items-center ">
               <span>Choix de role :</span>
               <button
-                onClick={() => (setEmploye(true), setAdmin(!adminBtn))}
-                className={
-                  employeBtn
-                    ? "bg-black py-2 px-4 rounded-full text-white"
-                    : "bg-gray-100 py-2 px-4 rounded-full text-black"
-                }
-              >
-                USER
-              </button>
-              <button
                 onClick={() => (setEmploye(!employeBtn), setAdmin(true))}
                 className={
                   adminBtn
@@ -88,6 +78,16 @@ export const Login = () => {
                 }
               >
                 ADMIN
+              </button>
+              <button
+                onClick={() => (setEmploye(true), setAdmin(!adminBtn))}
+                className={
+                  employeBtn
+                    ? "bg-black py-2 px-4 rounded-full text-white"
+                    : "bg-gray-100 py-2 px-4 rounded-full text-black"
+                }
+              >
+                EMPLOYE
               </button>
             </div>
             <div className="text-black text-2xl font-medium self-stretch mt-5 max-md:max-w-full max-md:mt-10 font-['Poppins'] ">

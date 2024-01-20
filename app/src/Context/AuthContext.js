@@ -20,7 +20,7 @@ export function AuthProvider(props) {
 
   const [select, setSelect] = useState(false);
   const [employe, setEmploye] = useState("");
-
+  //******* */
   const [nbrCommndeTerminé, setNbrCommndeTerminé] = useState(0);
   const [nbrCommndeCours, setNbrCommndeCours] = useState(0);
   const [listCommand, setListeCommand] = useState([]);
@@ -28,32 +28,40 @@ export function AuthProvider(props) {
   const [idCommandSpc, setIdCommandSpc] = useState({});
   const [commandSpc, setCommandSpc] = useState({});
 
+  const [listeArticService, setListeArticService] = useState([]);
+
+  const [clientName, setClientName] = useState("Null");
+
+  const [userNumberAdd, setUserNumberAdd] = useState(String);
+
+  /******* */
+
   const [listEmpl, setListEmpl] = useState([]);
   const [nbrDispo, setNbrDispo] = useState(0);
 
   const REGISTER_URL = "/commande";
   const REGISTER_URL_EMPLOYE = "/employe";
 
-  useEffect(
-    () =>
-      GetCommand({
-        setListeCommand: setListeCommand,
-        setNbrCommndeTerminé: setNbrCommndeTerminé,
-        setNbrCommndeCours: setNbrCommndeCours,
-        listCommand: listCommand,
-      }),
-    []
-  );
+  // useEffect(
+  //   () =>
+  //     GetCommand({
+  //       setListeCommand: setListeCommand,
+  //       setNbrCommndeTerminé: setNbrCommndeTerminé,
+  //       setNbrCommndeCours: setNbrCommndeCours,
+  //       listCommand: listCommand,
+  //     }),
+  //   []
+  // );
 
-  useEffect(() => {
-    setNbrCommndeTerminé(0);
-    setNbrCommndeCours(0);
-    listCommand.map((index) =>
-      index.commandeStatut == "En cours d'attribution"
-        ? setNbrCommndeCours((nbrCommndeCours) => nbrCommndeCours + 1)
-        : setNbrCommndeTerminé((nbrCommndeTerminé) => nbrCommndeTerminé + 1)
-    );
-  }, [listCommand]);
+  // useEffect(() => {
+  //   setNbrCommndeTerminé(0);
+  //   setNbrCommndeCours(0);
+  //   listCommand.map((index) =>
+  //     index.commandeStatut == "En cours d'attribution"
+  //       ? setNbrCommndeCours((nbrCommndeCours) => nbrCommndeCours + 1)
+  //       : setNbrCommndeTerminé((nbrCommndeTerminé) => nbrCommndeTerminé + 1)
+  //   );
+  // }, [listCommand]);
 
   // useEffect(() => {
   //   axios
@@ -93,7 +101,22 @@ export function AuthProvider(props) {
     listCommand,
     commandSpc,
     setCommandSpc,
+
+    setIdCommandSpc,
+    setListeCommand,
+    setNbrCommndeTerminé,
+    setNbrCommndeCours,
+
+    listeArticService,
+    setListeArticService,
+
+    clientName,
+    setClientName,
+
+    userNumberAdd,
+    setUserNumberAdd,
     /**/
+
     isLoggedIn,
     setIsLoggedInz,
     userPassword,

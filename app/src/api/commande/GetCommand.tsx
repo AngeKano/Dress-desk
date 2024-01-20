@@ -18,7 +18,6 @@ export const GetCommand = (props: any) => {
       console.log(err);
       return err;
     });
-
 };
 
 export const GetCommandSpc = (props: any) => {
@@ -35,7 +34,7 @@ export const GetCommandSpc = (props: any) => {
       withCredentials: true,
     })
     .then((res) => props.setCommandSpc(res.data))
-    .then(()=>props.navigate('/DetailCommand'))
+    .then(() => props.navigate("/DetailCommand"))
     .catch((err) => {
       console.log(err);
       return err;

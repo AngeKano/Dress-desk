@@ -1,12 +1,27 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Nav } from "../../components/nav/Nav";
 import { HeaderNav } from "../../components/nav/HeaderNav";
 import { HeaderTxt } from "../../components/nav/HeaderTxt";
 import { useNavigate } from "react-router-dom";
 import { _onSubmitAddCommand } from "../../api/RequestApi";
+import { AuthContext } from "../../Context/AuthContext";
+import { GetArticleService } from "../../api/article-service/GetArticleService";
 import axios from "../../api/axios";
+import { GetCommand } from "../../api/commande/GetCommand";
+import { GetClient } from "../../api/client/GetClient";
 
 export const AddCommand = () => {
+  const {
+    listeArticService,
+    setListeArticService,
+    setListeCommand,
+    listCommand,
+    clientName,
+    setClientName,
+    userNumberAdd,
+    setUserNumberAdd,
+  } = useContext(AuthContext);
+
   let yourDate = new Date();
   let date = yourDate.toISOString().split("T")[0];
   const [clientEmail, setclientEmail] = useState(String);
@@ -14,10 +29,8 @@ export const AddCommand = () => {
   const [commandeStatut, setCommandeStatut] = useState("En traitement");
   const [detailsCommandeQuantite, setDetailsCommandeQuantite] = useState(1);
   const [detailsCommandeNote, setDetailsCommandeNote] = useState(String);
-  const [clientName, setClientName] = useState("");
   const [nbrCommand, setNbrCommand] = useState();
 
-  const [listeArticService, setListeArticService] = useState([]);
   const [articleservice, setarticleservice] = useState({
     idArticleService: 0,
     articleserviceNom: "Null",
@@ -26,56 +39,30 @@ export const AddCommand = () => {
 
   const navigate = useNavigate();
   const REGISTER_URL_CLIENT = "/client";
-  const REGISTER_URL_ARTSERVICE = "/article-service";
-  const REGISTER_URL_NBRECOMMAND = "/commande";
+
   useEffect(() => {
-    axios
-      .get(REGISTER_URL_ARTSERVICE, {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${sessionStorage.getItem("accessToken")}`,
-        },
-        withCredentials: true,
-      })
-      .then((res) => setListeArticService(res.data))
-      .catch((e) => console.log(e));
+    GetArticleService({
+      setListeArticService: setListeArticService,
+    });
+    GetCommand({
+      setListeCommand: setListeCommand,
+    });
   }, []);
+
   useEffect(() => {
-    axios
-      .get(REGISTER_URL_NBRECOMMAND, {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${sessionStorage.getItem("accessToken")}`,
-        },
-        withCredentials: true,
-      })
-      .then((res) =>
-        setNbrCommand(
-          res.data.length > 0 ? res.data[res.data.length - 1].idCommande + 1 : 1
-        )
-      );
-  }, [clientEmail]);
+    setNbrCommand(
+      listCommand.length > 0
+        ? listCommand[listCommand.length - 1].idCommande + 1
+        : "N/A"
+    );
+  }, [listCommand]);
 
   const _onSubClient = async (props: any) => {
-    setclientEmail(props);
-
-    try {
-      axios
-        .get(REGISTER_URL_CLIENT, {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${sessionStorage.getItem("accessToken")}`,
-          },
-          withCredentials: true,
-        })
-        .then((res) =>
-          res.data.map((index: any, key: any) =>
-            props == index.userEmail ? setClientName(index.userNames) : null
-          )
-        );
-    } catch (err) {
-      console.log(err);
-    }
+    setUserNumberAdd(props.e);
+    GetClient({
+      setClientName: setClientName,
+      userNumber: userNumberAdd,
+    });
   };
 
   const _onSubmit = async () => {
@@ -125,15 +112,17 @@ export const AddCommand = () => {
                       </span>
                     </div>
                     <span className="text-black text-lg font-medium self-stretch mt-11 max-md:max-w-full max-md:mt-10">
-                      Adresse mail du client
+                      Numero du client
                     </span>
                     <span className="text-zinc-600 text-sm font-light self-stretch max-md:max-w-full">
-                      Les nom et l’identifiant du client sont unique
+                      Les numeros identifiant du client sont unique
                     </span>
                     <input
-                      value={clientEmail}
-                      onChange={(e) => _onSubClient(e.target.value)}
-                      placeholder="chrishine@example.com"
+                      value={userNumberAdd}
+                      onChange={(e) => {
+                        _onSubClient({ e: e.target.value });
+                      }}
+                      placeholder="+2250151831681"
                       className="bg-gray-100 px-5 flex w-[255px] shrink-0 max-w-full h-11 flex-col mt-3.5 rounded-[121px] self-start"
                     />
                     <div className="flex gap-2.5 mt-3 self-start items-start">
@@ -151,7 +140,7 @@ export const AddCommand = () => {
                     <div className="flex items-stretch justify-between gap-5 mt-5 self-start">
                       <div className="text-black text-md font-medium bg-gray-200 grow justify-center items-center px-11 py-2 rounded-full max-md:px-5">
                         com-
-                        {!clientName.toLowerCase()
+                        {clientName == undefined
                           ? "null"
                           : clientName.toLowerCase()}
                         {"-" + nbrCommand}

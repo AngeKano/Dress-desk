@@ -1,13 +1,40 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { Nav } from "../components/nav/Nav";
 import { HeaderNav } from "../components/nav/HeaderNav";
 import { HeaderTxt } from "../components/nav/HeaderTxt";
 import { HeaderStat } from "../components/nav/HeaderStat";
 import { ItemsCommd } from "../components/nav/items/ItemsCommd";
 import { AuthContext } from "../Context/AuthContext";
+import { GetCommand } from "../api/commande/GetCommand";
 
 export const Dashboard = () => {
-  const { listCommand, setIdCommandSpc } = useContext(AuthContext);
+  const {
+    listCommand,
+    setIdCommandSpc,
+    setListeCommand,
+    setNbrCommndeTerminé,
+    setNbrCommndeCours,
+  } = useContext(AuthContext);
+
+  useEffect(
+    () =>
+      GetCommand({
+        setListeCommand: setListeCommand,
+      }),
+    []
+  );
+
+  useEffect(() => {
+    setNbrCommndeTerminé(0);
+    setNbrCommndeCours(0);
+    listCommand.map((index: any) =>
+      index.commandeStatut == "En cours d'attribution"
+        ? setNbrCommndeCours((nbrCommndeCours: any) => nbrCommndeCours + 1)
+        : setNbrCommndeTerminé(
+            (nbrCommndeTerminé: any) => nbrCommndeTerminé + 1
+          )
+    );
+  }, [listCommand]);
 
   return (
     <div className="bg-slate-300">
