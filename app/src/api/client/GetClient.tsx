@@ -19,7 +19,7 @@ export const GetClient = (props: any) => {
     )
     .then(() => console.log(props.userNumber))
     .catch((err) => {
-      console.log(err);
+      null
       return err;
     });
 };
