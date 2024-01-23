@@ -7,7 +7,7 @@ const PostDetailsCommand = async (props: any) => {
   const numeroCommande = props.numeroCommande;
   const articleservice = props.articleservice;
 
-  try { 
+  try {
     await axios
       .post(
         POST_URL,
@@ -25,6 +25,7 @@ const PostDetailsCommand = async (props: any) => {
           withCredentials: true,
         }
       )
+      .then(() => props.navigate("/Dashboard"))
       .catch((err) => {
         return err;
       });

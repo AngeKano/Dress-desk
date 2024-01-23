@@ -9,6 +9,7 @@ import { GetArticleService } from "../../api/article-service/GetArticleService";
 import axios from "../../api/axios";
 import { GetCommand } from "../../api/commande/GetCommand";
 import { GetClient } from "../../api/client/GetClient";
+import { PostCommand } from "../../api/commande/PostCommand";
 
 export const AddCommand = () => {
   const {
@@ -18,18 +19,12 @@ export const AddCommand = () => {
     listCommand,
     clientName,
     setClientName,
-    userNumberAdd,
-    setUserNumberAdd,
   } = useContext(AuthContext);
 
-  let yourDate = new Date();
-  let date = yourDate.toISOString().split("T")[0];
-  const [clientEmail, setclientEmail] = useState(String);
-  const [commandeDateDepot, setCommandeDateDepot] = useState(date);
-  const [commandeStatut, setCommandeStatut] = useState("En traitement");
   const [detailsCommandeQuantite, setDetailsCommandeQuantite] = useState(1);
   const [detailsCommandeNote, setDetailsCommandeNote] = useState(String);
   const [nbrCommand, setNbrCommand] = useState();
+  const [userNumberAdd, setUserNumberAdd] = useState("");
 
   const [articleservice, setarticleservice] = useState({
     idArticleService: 0,
@@ -57,8 +52,7 @@ export const AddCommand = () => {
     );
   }, [listCommand]);
 
-  const _onSubClient = async (props: any) => {
-    setUserNumberAdd(props.e);
+  const _onSubClient = () => {
     GetClient({
       setClientName: setClientName,
       userNumber: userNumberAdd,
@@ -67,25 +61,45 @@ export const AddCommand = () => {
 
   const _onSubmit = async () => {
     try {
-      const res = await _onSubmitAddCommand({
-        // Api COMMANDE
-
-        commandeStatut: commandeStatut,
-        commandeDateDepot: commandeDateDepot,
-        clientEmail: clientEmail,
-        // Api DETAILS COMMANDE
+      PostCommand({
+        userNumber: userNumberAdd,
         detailsCommandeQuantite: detailsCommandeQuantite,
         detailsCommandeNote: detailsCommandeNote,
         articleservice: articleservice.articleserviceNom,
-        //Aide pour le numeroCommande
-        clientName: clientName,
-        nbrCommand: nbrCommand,
+        navigate:navigate
       });
-      navigate("/Dashboard");
-    } catch (Err) {
-      console.log(Err);
+      //       PostDetailsCommand({
+      //         detailsCommandeQuantite:detailsCommandeQuantite,
+      // detailsCommandeNote:detailsCommandeNote,
+      // numeroCommande:numeroCommande,
+      // articleservice:articleservice,
+      //       })
+    } catch (err) {
+      console.log(err);
     }
   };
+
+  // const _onSubmit = async () => {
+  //   try {
+  //     const res = await _onSubmitAddCommand({
+  //       // Api COMMANDE
+
+  //       commandeStatut: commandeStatut,
+  //       commandeDateDepot: commandeDateDepot,
+  //       clientEmail: clientEmail,
+  //       // Api DETAILS COMMANDE
+  //       detailsCommandeQuantite: detailsCommandeQuantite,
+  //       detailsCommandeNote: detailsCommandeNote,
+  //       articleservice: articleservice.articleserviceNom,
+  //       //Aide pour le numeroCommande
+  //       clientName: clientName,
+  //       nbrCommand: nbrCommand,
+  //     });
+  //     navigate("/Dashboard");
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // };
 
   return (
     <div className="bg-slate-300">
@@ -120,7 +134,8 @@ export const AddCommand = () => {
                     <input
                       value={userNumberAdd}
                       onChange={(e) => {
-                        _onSubClient({ e: e.target.value });
+                        setUserNumberAdd(e.target.value);
+                        _onSubClient();
                       }}
                       placeholder="+2250151831681"
                       className="bg-gray-100 px-5 flex w-[255px] shrink-0 max-w-full h-11 flex-col mt-3.5 rounded-[121px] self-start"

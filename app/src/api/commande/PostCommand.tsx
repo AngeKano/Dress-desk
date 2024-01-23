@@ -1,8 +1,11 @@
 import axios from "../axios";
+import PostDetailsCommand from "../details-commande/PostDetailsCommand";
 
 export const PostCommand = async (props: any) => {
   const userNumber = props.userNumber;
   const POST_URL = "/commande/nouvelle-commande";
+
+  let numeroCommande = "";
 
   try {
     await axios
@@ -13,6 +16,16 @@ export const PostCommand = async (props: any) => {
         },
         withCredentials: true,
       })
+      .then((res) => (numeroCommande = res.data.numeroCommande))
+      .then(() =>
+        PostDetailsCommand({
+          detailsCommandeQuantite: props.detailsCommandeQuantite,
+          detailsCommandeNote: props.detailsCommandeNote,
+          numeroCommande: numeroCommande,
+          articleservice: props.articleservice,
+          navigate:props.navigate
+        })
+      )
       .catch((err) => {
         return err;
       });
