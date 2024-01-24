@@ -6,7 +6,6 @@ import { useNavigate } from "react-router-dom";
 import { _onSubmitAddCommand } from "../../api/RequestApi";
 import { AuthContext } from "../../Context/AuthContext";
 import { GetArticleService } from "../../api/article-service/GetArticleService";
-import axios from "../../api/axios";
 import { GetCommand } from "../../api/commande/GetCommand";
 import { GetClient } from "../../api/client/GetClient";
 import { PostCommand } from "../../api/commande/PostCommand";
@@ -66,40 +65,12 @@ export const AddCommand = () => {
         detailsCommandeQuantite: detailsCommandeQuantite,
         detailsCommandeNote: detailsCommandeNote,
         articleservice: articleservice.articleserviceNom,
-        navigate:navigate
+        navigate: navigate,
       });
-      //       PostDetailsCommand({
-      //         detailsCommandeQuantite:detailsCommandeQuantite,
-      // detailsCommandeNote:detailsCommandeNote,
-      // numeroCommande:numeroCommande,
-      // articleservice:articleservice,
-      //       })
     } catch (err) {
       console.log(err);
     }
   };
-
-  // const _onSubmit = async () => {
-  //   try {
-  //     const res = await _onSubmitAddCommand({
-  //       // Api COMMANDE
-
-  //       commandeStatut: commandeStatut,
-  //       commandeDateDepot: commandeDateDepot,
-  //       clientEmail: clientEmail,
-  //       // Api DETAILS COMMANDE
-  //       detailsCommandeQuantite: detailsCommandeQuantite,
-  //       detailsCommandeNote: detailsCommandeNote,
-  //       articleservice: articleservice.articleserviceNom,
-  //       //Aide pour le numeroCommande
-  //       clientName: clientName,
-  //       nbrCommand: nbrCommand,
-  //     });
-  //     navigate("/Dashboard");
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // };
 
   return (
     <div className="bg-slate-300">
