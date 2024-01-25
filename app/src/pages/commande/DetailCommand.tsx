@@ -1,11 +1,14 @@
-import  { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Nav } from "../../components/nav/Nav";
 import { HeaderNav } from "../../components/nav/HeaderNav";
 import { HeaderTxt } from "../../components/nav/HeaderTxt";
 import { Status } from "../../components/status/Status";
 import axios from "../../api/axios";
+import { AuthContext } from "../../Context/AuthContext";
+import { GetCommandSpc } from "../../api/commande/GetCommand";
 
 export const DetailCommand = () => {
+  const { idCommandSpc } = useContext(AuthContext);
   const [detailCommand, setDetailCommand] = useState({
     idCommande: 0,
     commandeStatut: "En traitement",
@@ -35,15 +38,20 @@ export const DetailCommand = () => {
   });
   const REGISTER_URL = `/commande/${sessionStorage.getItem("idCommande")}`;
   useEffect(() => {
-    axios
-      .get(REGISTER_URL, {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${sessionStorage.getItem("accessToken")}`,
-        },
-        withCredentials: true,
-      })
-      .then((res) => setDetailCommand(res.data));
+    console.log(idCommandSpc)
+    // GetCommandSpc({
+    //   idCommand: idCommandSpc,
+    //   setDetailCommand: setDetailCommand,
+    // });
+    // axios
+    //   .get(REGISTER_URL, {
+    //     headers: {
+    //       "Content-Type": "application/json",
+    //       Authorization: `Bearer ${sessionStorage.getItem("accessToken")}`,
+    //     },
+    //     withCredentials: true,
+    //   })
+    //   .then((res) => setDetailCommand(res.data));
   }, []);
   return (
     <div className="bg-slate-300">

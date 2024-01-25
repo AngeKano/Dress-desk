@@ -102,6 +102,7 @@ export function AuthProvider(props) {
     commandSpc,
     setCommandSpc,
 
+    idCommandSpc,
     setIdCommandSpc,
     setListeCommand,
     setNbrCommndeTerminé,
