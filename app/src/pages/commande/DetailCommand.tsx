@@ -36,7 +36,7 @@ export const DetailCommand = () => {
       commandes: [],
     },
   });
-  const REGISTER_URL = `/commande/${sessionStorage.getItem("idCommande")}`;
+  // const REGISTER_URL = `/commande/${sessionStorage.getItem("idCommande")}`;
   useEffect(() => {
     console.log(idCommandSpc)
     // GetCommandSpc({

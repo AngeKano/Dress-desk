@@ -24,7 +24,6 @@ export const GetCommandSpc = (props: any) => {
   // GET SPECIFIES COMMAND
 
   const GET_SPC_URL = `/commande/voir-commande/${props.idCommand}`;
-
   axios
     .get(GET_SPC_URL, {
       headers: {
