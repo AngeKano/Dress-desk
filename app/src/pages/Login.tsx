@@ -18,7 +18,6 @@ export const Login = () => {
   const [employeBtn, setEmploye] = useState(true);
 
   const navigate = useNavigate();
-qsdq cd
   const _onSubmit = () =>
     adminBtn
       ? AdminLogin({
