@@ -38,7 +38,20 @@ export const DetailCommand = () => {
   });
   // const REGISTER_URL = `/commande/${sessionStorage.getItem("idCommande")}`;
   useEffect(() => {
-    console.log(idCommandSpc)
+    console.log(idCommandSpc);
+    // GetCommandSpc({
+    //   idCommand: idCommandSpc,
+    //   setDetailCommand: setDetailCommand,
+    // });
+    // axios
+    //   .get(REGISTER_URL, {
+    //     headers: {
+    //       "Content-Type": "application/json",
+    //       Authorization: `Bearer ${sessionStorage.getItem("accessToken")}`,
+    //     },
+    //     withCredentials: true,
+    //   })
+    //   .then((res) => setDetailCommand(res.data));
     // GetCommandSpc({
     //   idCommand: idCommandSpc,
     //   setDetailCommand: setDetailCommand,
