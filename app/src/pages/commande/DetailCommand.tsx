@@ -51,6 +51,16 @@ export const DetailCommand = () => {
     //     },
     //     withCredentials: true,
     //   })
+    //   .then((res) => setDetailCommand(res.data)); setDetailCommand: setDetailCommand,
+    // });
+    // axios
+    //   .get(REGISTER_URL, {
+    //     headers: {
+    //       "Content-Type": "application/json",
+    //       Authorization: `Bearer ${sessionStorage.getItem("accessToken")}`,
+    //     },
+    //     withCredentials: true,
+    //   })
     //   .then((res) => setDetailCommand(res.data));
   }, []);
   return (
