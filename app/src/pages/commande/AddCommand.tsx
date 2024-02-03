@@ -33,7 +33,29 @@ export const AddCommand = () => {
 
   const navigate = useNavigate();
   const REGISTER_URL_CLIENT = "/client";
-
+  GetCommandSpc({
+    //   idCommand: idCommandSpc,
+    //   setDetailCommand: setDetailCommand,
+    // });
+    // axios
+    //   .get(REGISTER_URL, {
+    //     headers: {
+    //       "Content-Type": "application/json",
+    //       Authorization: `Bearer ${sessionStorage.getItem("accessToken")}`,
+    //     },
+    //     withCredentials: true,
+    //   })
+    //   .then((res) => setDetailCommand(res.data)); setDetailCommand: setDetailCommand,
+    // });
+    // axios
+    //   .get(REGISTER_URL, {
+    //     headers: {
+    //       "Content-Type": "application/json",
+    //       Authorization: `Bearer ${sessionStorage.getItem("accessToken")}`,
+    //     },
+    //     withCredentials: true,
+    //   })
+    //   .then((res) => setDetailCommand(res.data));
   useEffect(() => {
     GetArticleService({
       setListeArticService: setListeArticService,
