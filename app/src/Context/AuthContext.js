@@ -53,37 +53,8 @@ export function AuthProvider(props) {
   //   []
   // );
 
-  // useEffect(() => {
-  //   setNbrCommndeTerminé(0);
-  //   setNbrCommndeCours(0);
-  //   listCommand.map((index) =>
-  //     index.commandeStatut == "En cours d'attribution"
-  //       ? setNbrCommndeCours((nbrCommndeCours) => nbrCommndeCours + 1)
-  //       : setNbrCommndeTerminé((nbrCommndeTerminé) => nbrCommndeTerminé + 1)
-  //   );
-  // }, [listCommand]);
+ 
 
-  // useEffect(() => {
-  //   axios
-  //     .get(REGISTER_URL_EMPLOYE, {
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //         Authorization: `Bearer ${sessionStorage.getItem("accessToken")}`,
-  //       },
-  //       withCredentials: true,
-  //     })
-  //     .then((res) => setListEmpl(res.data))
-  //     .catch((e) => console.log(e));
-  // }, []);
-
-  // useEffect(() => {
-  //   setNbrDispo(0);
-  //   listEmpl.map((index) =>
-  //     index.tacheEmployes.length == 0
-  //       ? setNbrDispo((nbrDispo) => nbrDispo + 1)
-  //       : null
-  //   );
-  // }, [listEmpl]);
 
   const value = {
     //Login Page State utilies
