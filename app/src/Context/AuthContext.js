@@ -42,16 +42,7 @@ export function AuthProvider(props) {
   const REGISTER_URL = "/commande";
   const REGISTER_URL_EMPLOYE = "/employe";
 
-  // useEffect(
-  //   () =>
-  //     GetCommand({
-  //       setListeCommand: setListeCommand,
-  //       setNbrCommndeTerminé: setNbrCommndeTerminé,
-  //       setNbrCommndeCours: setNbrCommndeCours,
-  //       listCommand: listCommand,
-  //     }),
-  //   []
-  // );
+
 
  
 
