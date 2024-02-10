@@ -12,34 +12,34 @@ import { AuthContext } from "../../Context/AuthContext";
 export const TaskAttrib = () => {
   const { employe } = useContext(AuthContext);
 
-  const [command, setCommand] = useState({
-    idCommande: 28,
-    commandeStatut: "Null",
-    commandeDateDepot: [2023, 12, 31],
-    numeroCommande: "Null",
-    detailsCommandes: [
-      {
-        idDetailsCommande: 5,
-        detailsCommandeQuantite: 5,
-        detailsCommandeNote: "qsqs sdsd",
-        prixTotal: 750.0,
-      },
-    ],
-    paiements: [],
-    client: {
-      idUser: 52,
-      userPassword:
-        "$2a$10$BPhh6yIBHCaee54uLLrxmuSuvTntoS0a30rIwIOTsP1EmElIjpbJK",
-      userEmail: "chrishine@example.com",
-      userNames: "chrishine",
-      statutConnexion: "déconnecté",
-      dateInscription: [2024, 1, 3],
-      role: "CLIENT",
-      clientAdresse: "Daloa",
-      clientTelephone: "+2250768790582",
-      commandes: [],
-    },
-  });
+  // const [command, setCommand] = useState({
+  //   idCommande: 28,
+  //   commandeStatut: "Null",
+  //   commandeDateDepot: [2023, 12, 31],
+  //   numeroCommande: "Null",
+  //   detailsCommandes: [
+  //     {
+  //       idDetailsCommande: 5,
+  //       detailsCommandeQuantite: 5,
+  //       detailsCommandeNote: "qsqs sdsd",
+  //       prixTotal: 750.0,
+  //     },
+  //   ],
+  //   paiements: [],
+  //   client: {
+  //     idUser: 52,
+  //     userPassword:
+  //       "$2a$10$BPhh6yIBHCaee54uLLrxmuSuvTntoS0a30rIwIOTsP1EmElIjpbJK",
+  //     userEmail: "chrishine@example.com",
+  //     userNames: "chrishine",
+  //     statutConnexion: "déconnecté",
+  //     dateInscription: [2024, 1, 3],
+  //     role: "CLIENT",
+  //     clientAdresse: "Daloa",
+  //     clientTelephone: "+2250768790582",
+  //     commandes: [],
+  //   },
+  // });
   const navigate = useNavigate();
 
   const [tacheEmployeDescription, setTacheEmployeDescription] = useState("NàN");

@@ -42,11 +42,6 @@ export function AuthProvider(props) {
   const REGISTER_URL = "/commande";
   const REGISTER_URL_EMPLOYE = "/employe";
 
-
-
- 
-
-
   const value = {
     //Login Page State utilies
 
